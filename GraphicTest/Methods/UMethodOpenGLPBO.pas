@@ -1,4 +1,4 @@
-unit UOpenGLPBOMethod;
+unit UMethodOpenGLPBO;
 
 {$mode delphi}
 
@@ -10,9 +10,9 @@ uses
 
 {$IFDEF OPENGL}
 type
-  { TOpenGLPBOMethod }
+  { TMethodOpenGLPBO }
 
-  TOpenGLPBOMethod = class(TDrawMethodOpenGL)
+  TMethodOpenGLPBO = class(TDrawMethodOpenGL)
     pboIds: array[0..1] of GLuint;
     Index, NextIndex: Integer;
     procedure Init(AParent: TWinControl; Size: TPoint; PixelFormat: TPixelFormat); override;
@@ -26,11 +26,11 @@ type
 implementation
 
 {$IFDEF OPENGL}
-{ TOpenGLPBOMethod }
+{ TMethodOpenGLPBO }
 
 //procedure glGenBuffersARB2 : procedure(n : GLsizei; buffers : PGLuint); extdecl;
 
-procedure TOpenGLPBOMethod.Init(AParent: TWinControl; Size: TPoint; PixelFormat: TPixelFormat);
+procedure TMethodOpenGLPBO.Init(AParent: TWinControl; Size: TPoint; PixelFormat: TPixelFormat);
 var
   DataSize: Integer;
   glExtensions: string;
@@ -60,7 +60,7 @@ begin
       0, GL_RGBA, GL_UNSIGNED_BYTE, OpenGLBitmap);
 end;
 
-constructor TOpenGLPBOMethod.Create;
+constructor TMethodOpenGLPBO.Create;
 begin
   inherited Create;
   Caption := 'OpenGL PBO';
@@ -72,12 +72,12 @@ begin
     'use DMA(Direct Memory Access) for faster texture data transfer without use of CPU.');
 end;
 
-destructor TOpenGLPBOMethod.Destroy;
+destructor TMethodOpenGLPBO.Destroy;
 begin
   inherited Destroy;
 end;
 
-procedure TOpenGLPBOMethod.DrawFrame(FastBitmap: TFastBitmap);
+procedure TMethodOpenGLPBO.DrawFrame(FastBitmap: TFastBitmap);
 var
   X, Y: Integer;
   P: PCardinal;

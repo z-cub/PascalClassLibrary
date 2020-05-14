@@ -1,4 +1,4 @@
-unit UOpenGLMethod;
+unit UMethodOpenGL;
 
 {$mode delphi}
 
@@ -10,9 +10,9 @@ uses
 
 {$IFDEF OPENGL}
 type
-  { TOpenGLMethod }
+  { TMethodOpenGL }
 
-  TOpenGLMethod = class(TDrawMethodOpenGL)
+  TMethodOpenGL = class(TDrawMethodOpenGL)
     constructor Create; override;
     destructor Destroy; override;
     procedure DrawFrame(FastBitmap: TFastBitmap); override;
@@ -23,9 +23,9 @@ type
 implementation
 
 {$IFDEF OPENGL}
-{ TOpenGLMethod }
+{ TMethodOpenGL }
 
-constructor TOpenGLMethod.Create;
+constructor TMethodOpenGL.Create;
 begin
   inherited Create;
   Caption := 'OpenGL';
@@ -34,12 +34,12 @@ begin
     'Texture data is loaded from bitmap.');
 end;
 
-destructor TOpenGLMethod.Destroy;
+destructor TMethodOpenGL.Destroy;
 begin
   inherited Destroy;
 end;
 
-procedure TOpenGLMethod.DrawFrame(FastBitmap: TFastBitmap);
+procedure TMethodOpenGL.DrawFrame(FastBitmap: TFastBitmap);
 var
   X, Y: Integer;
   P: PCardinal;

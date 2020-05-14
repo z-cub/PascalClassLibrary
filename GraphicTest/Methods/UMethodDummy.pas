@@ -1,4 +1,4 @@
-unit UDummyMethod;
+unit UMethodDummy;
 
 {$mode delphi}
 
@@ -8,9 +8,9 @@ uses
   Classes, SysUtils, UDrawMethod, UFastBitmap;
 
 type
-  { TDummyMethod }
+  { TMethodDummy }
 
-  TDummyMethod = class(TDrawMethod)
+  TMethodDummy = class(TDrawMethod)
     constructor Create; override;
     procedure DrawFrame(FastBitmap: TFastBitmap); override;
   end;
@@ -18,9 +18,9 @@ type
 
 implementation
 
-{ TDummyMethod }
+{ TMethodDummy }
 
-constructor TDummyMethod.Create;
+constructor TMethodDummy.Create;
 begin
   inherited Create;
   Caption := 'Dummy';
@@ -28,7 +28,7 @@ begin
     'and compare speed of system and event handling.');
 end;
 
-procedure TDummyMethod.DrawFrame(FastBitmap: TFastBitmap);
+procedure TMethodDummy.DrawFrame(FastBitmap: TFastBitmap);
 begin
 end;
 

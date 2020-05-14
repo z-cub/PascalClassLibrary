@@ -117,10 +117,11 @@ implementation
 {$R *.lfm}
 
 uses
-  UFormDraw, ULazIntfImageColorsCopy, ULazIntfImageColorsNoCopy, UCanvasPixels,
-  UCanvasPixelsUpdateLock, UBGRABitmapPaintBox, UBitmapRawImageDataPaintBox,
-  UBitmapRawImageData, UBitmapRawImageDataMove, UDummyMethod, UOpenGLMethod,
-  UOpenGLPBOMethod{$IFDEF GRAPHICS32}, UGraphics32Method{$ENDIF};
+  UFormDraw, UMethodLazIntfImageColorsCopy, UMethodLazIntfImageColorsNoCopy, UMethodCanvasPixels,
+  UMethodCanvasPixelsUpdateLock, UMethodBGRABitmap, UMethodBitmapRawImageDataPaintBox,
+  UMethodBitmapRawImageData, UMethodBitmapRawImageDataMove, UMethodDummy, UMethodOpenGL,
+  UMethodOpenGLPBO{$IFDEF GRAPHICS32}, UGraphics32Method{$ENDIF},
+  UMethodBitmapScanline, UMethodMove;
 
 { TFormMain }
 
@@ -403,22 +404,24 @@ end;
 
 procedure TFormMain.RegisterDrawMethods;
 begin
-  RegisterDrawMethod(TCanvasPixels);
-  RegisterDrawMethod(TCanvasPixelsUpdateLock);
-  RegisterDrawMethod(TLazIntfImageColorsCopy);
-  RegisterDrawMethod(TLazIntfImageColorsNoCopy);
-  RegisterDrawMethod(TBitmapRawImageData);
-  RegisterDrawMethod(TBitmapRawImageDataPaintBox);
-  RegisterDrawMethod(TBitmapRawImageDataMove);
-  RegisterDrawMethod(TBGRABitmapPaintBox);
+  RegisterDrawMethod(TMethodCanvasPixels);
+  RegisterDrawMethod(TMethodCanvasPixelsUpdateLock);
+  RegisterDrawMethod(TMethodLazIntfImageColorsCopy);
+  RegisterDrawMethod(TMethodLazIntfImageColorsNoCopy);
+  RegisterDrawMethod(TMethodBitmapRawImageData);
+  RegisterDrawMethod(TMethodBitmapRawImageDataPaintBox);
+  RegisterDrawMethod(TMethodBitmapRawImageDataMove);
+  RegisterDrawMethod(TMethodBitmapScanline);
+  RegisterDrawMethod(TMethodBGRABitmap);
   {$IFDEF GRAPHICS32}
-  RegisterDrawMethod(TGraphics32Method);
+  RegisterDrawMethod(TMethodGraphics32);
   {$ENDIF}
   {$IFDEF OPENGL}
-  RegisterDrawMethod(TOpenGLMethod);
-  RegisterDrawMethod(TOpenGLPBOMethod);
+  RegisterDrawMethod(TMethodOpenGL);
+  RegisterDrawMethod(TMethodOpenGLPBO);
   {$ENDIF}
-  RegisterDrawMethod(TDummyMethod);
+  RegisterDrawMethod(TMethodMove);
+  RegisterDrawMethod(TMethodDummy);
 end;
 
 procedure TFormMain.RegisterDrawMethod(MethodClass: TDrawMethodClass);

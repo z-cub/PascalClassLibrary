@@ -1,4 +1,4 @@
-unit ULazIntfImageColorsCopy;
+unit UMethodLazIntfImageColorsCopy;
 
 {$mode delphi}
 
@@ -9,9 +9,9 @@ uses
   fpImage, Graphics;
 
 type
-  { TLazIntfImageColorsCopy }
+  { TMethodLazIntfImageColorsCopy }
 
-  TLazIntfImageColorsCopy = class(TDrawMethodImage)
+  TMethodLazIntfImageColorsCopy = class(TDrawMethodImage)
     constructor Create; override;
     destructor Destroy; override;
     procedure DrawFrame(FastBitmap: TFastBitmap); override;
@@ -20,9 +20,9 @@ type
 
 implementation
 
-{ TLazIntfImageColorsCopy }
+{ TMethodLazIntfImageColorsCopy }
 
-constructor TLazIntfImageColorsCopy.Create;
+constructor TMethodLazIntfImageColorsCopy.Create;
 begin
   inherited;
   Caption := 'TLazIntfImage.Colors copy';
@@ -30,12 +30,12 @@ begin
   Description.Add('TLazIntfImage is created from visible image.');
 end;
 
-destructor TLazIntfImageColorsCopy.Destroy;
+destructor TMethodLazIntfImageColorsCopy.Destroy;
 begin
   inherited Destroy;
 end;
 
-procedure TLazIntfImageColorsCopy.DrawFrame(FastBitmap: TFastBitmap);
+procedure TMethodLazIntfImageColorsCopy.DrawFrame(FastBitmap: TFastBitmap);
 var
   Y, X: Integer;
   TempIntfImage: TLazIntfImage;

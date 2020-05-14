@@ -1,4 +1,4 @@
-unit ULazIntfImageColorsNoCopy;
+unit UMethodLazIntfImageColorsNoCopy;
 
 {$mode delphi}
 
@@ -8,9 +8,9 @@ uses
   Classes, SysUtils, UDrawMethod, UFastBitmap, IntfGraphics, Graphics, Controls;
 
 type
-  { TLazIntfImageColorsNoCopy }
+  { TMethodLazIntfImageColorsNoCopy }
 
-  TLazIntfImageColorsNoCopy = class(TDrawMethodImage)
+  TMethodLazIntfImageColorsNoCopy = class(TDrawMethodImage)
     TempIntfImage: TLazIntfImage;
     procedure Init(Parent: TWinControl; Size: TPoint; PixelFormat: TPixelFormat); override;
     constructor Create; override;
@@ -21,16 +21,16 @@ type
 
 implementation
 
-{ TLazIntfImageColorsNoCopy }
+{ TMethodLazIntfImageColorsNoCopy }
 
-procedure TLazIntfImageColorsNoCopy.Init(Parent: TWinControl; Size: TPoint; PixelFormat: TPixelFormat);
+procedure TMethodLazIntfImageColorsNoCopy.Init(Parent: TWinControl; Size: TPoint; PixelFormat: TPixelFormat);
 begin
   inherited;
   TempIntfImage.Free;
   TempIntfImage := Image.Picture.Bitmap.CreateIntfImage;
 end;
 
-constructor TLazIntfImageColorsNoCopy.Create;
+constructor TMethodLazIntfImageColorsNoCopy.Create;
 begin
   inherited;
   Caption := 'TLazIntfImage.Colors no copy';
@@ -38,13 +38,13 @@ begin
   Description.Add('Bitmap is not copied from original bitmap.');
 end;
 
-destructor TLazIntfImageColorsNoCopy.Destroy;
+destructor TMethodLazIntfImageColorsNoCopy.Destroy;
 begin
   TempIntfImage.Free;
   inherited Destroy;
 end;
 
-procedure TLazIntfImageColorsNoCopy.DrawFrame(FastBitmap: TFastBitmap);
+procedure TMethodLazIntfImageColorsNoCopy.DrawFrame(FastBitmap: TFastBitmap);
 var
   Y, X: Integer;
 begin

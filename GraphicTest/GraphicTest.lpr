@@ -7,12 +7,12 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, SysUtils, openglcontext, UFormMain, UPlatform, UDrawMethod, UFastBitmap,
-  UFormDraw, bgrabitmappack,
-  UCanvasPixels, UCanvasPixelsUpdateLock,
-  ULazIntfImageColorsCopy, ULazIntfImageColorsNoCopy, UBGRABitmapPaintBox,
-  UBitmapRawImageDataPaintBox, UBitmapRawImageData, UDummyMethod,
-  UBitmapRawImageDataMove, UOpenGLMethod, UOpenGLPBOMethod, UGraphics32Method;
+  Forms, SysUtils, openglcontext, UFormMain, UPlatform, UDrawMethod,
+  UFastBitmap, UFormDraw, bgrabitmappack, UMethodCanvasPixels,
+  UMethodCanvasPixelsUpdateLock, UMethodLazIntfImageColorsCopy, UMethodLazIntfImageColorsNoCopy,
+  UMethodBGRABitmap, UMethodBitmapRawImageDataPaintBox, UMethodBitmapRawImageData,
+  UMethodDummy, UMethodBitmapRawImageDataMove, UMethodOpenGL, UMethodOpenGLPBO,
+  UMethodGraphics32, UMethodBitmapScanline;
 
 {$R *.res}
 

@@ -6,12 +6,12 @@ interface
 
 uses
   Classes, SysUtils, ExtCtrls, UPlatform, UFastBitmap, Graphics, Controls,
-  LCLType, IntfGraphics, fpImage, GraphType, DateUtils,
+  LCLType, IntfGraphics, fpImage, GraphType, DateUtils, Forms,
   {$IFDEF OPENGL}GL, GLExt, OpenGLContext,{$ENDIF}
   LclIntf;
 
 type
-  TPaintObject = (poImage, poPaintBox, poOpenGL);
+  TPaintObject = (poImage, poPaintBox, poOpenGL, poCanvas);
 
 
   { TDrawMethod }
@@ -64,6 +64,15 @@ type
     procedure Done; override;
   end;
 
+  { TDrawMethodCanvas }
+
+  TDrawMethodCanvas = class(TDrawMethod)
+    Canvas: TCanvas;
+    procedure UpdateSettings; override;
+    procedure Init(Parent: TWinControl; Size: TPoint; PixelFormat: TPixelFormat); override;
+    procedure Done; override;
+  end;
+
   {$IFDEF OPENGL}
 
   { TDrawMethodOpenGL }
@@ -83,6 +92,24 @@ type
 
 
 implementation
+
+{ TDrawMethodCanvas }
+
+procedure TDrawMethodCanvas.UpdateSettings;
+begin
+  inherited UpdateSettings;
+end;
+
+procedure TDrawMethodCanvas.Init(Parent: TWinControl; Size: TPoint;
+  PixelFormat: TPixelFormat);
+begin
+  Canvas := TForm(Parent).Canvas;
+end;
+
+procedure TDrawMethodCanvas.Done;
+begin
+  inherited Done;
+end;
 
 
 { TDrawMethodPaintBox }

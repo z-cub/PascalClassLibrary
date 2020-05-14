@@ -73,26 +73,22 @@
         <Mode0 Name="default"/>
       </Modes>
     </RunParams>
-    <RequiredPackages Count="5">
+    <RequiredPackages Count="4">
       <Item1>
-        <PackageName Value="GR32_Lazarus"/>
-        <DefaultFilename Value="Packages/Graphics32/Packages/GR32_Lazarus.lpk" Prefer="True"/>
+        <PackageName Value="lazopenglcontext"/>
       </Item1>
       <Item2>
-        <PackageName Value="lazopenglcontext"/>
-      </Item2>
-      <Item3>
         <PackageName Value="BGRABitmapPack"/>
         <DefaultFilename Value="Packages/bgrabitmap/bgrabitmappack.lpk" Prefer="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="SynEdit"/>
       </Item3>
       <Item4>
-        <PackageName Value="SynEdit"/>
-      </Item4>
-      <Item5>
         <PackageName Value="LCL"/>
-      </Item5>
+      </Item4>
     </RequiredPackages>
-    <Units Count="18">
+    <Units Count="20">
       <Unit0>
         <Filename Value="GraphicTest.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -124,53 +120,61 @@
         <ResourceBaseClass Value="Form"/>
       </Unit5>
       <Unit6>
-        <Filename Value="Methods/UCanvasPixels.pas"/>
+        <Filename Value="Methods/UMethodCanvasPixels.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit6>
       <Unit7>
-        <Filename Value="Methods/UCanvasPixelsUpdateLock.pas"/>
+        <Filename Value="Methods/UMethodCanvasPixelsUpdateLock.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit7>
       <Unit8>
-        <Filename Value="Methods/ULazIntfImageColorsCopy.pas"/>
+        <Filename Value="Methods/UMethodLazIntfImageColorsCopy.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit8>
       <Unit9>
-        <Filename Value="Methods/ULazIntfImageColorsNoCopy.pas"/>
+        <Filename Value="Methods/UMethodLazIntfImageColorsNoCopy.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit9>
       <Unit10>
-        <Filename Value="Methods/UBGRABitmapPaintBox.pas"/>
+        <Filename Value="Methods/UMethodBGRABitmap.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit10>
       <Unit11>
-        <Filename Value="Methods/UBitmapRawImageDataPaintBox.pas"/>
+        <Filename Value="Methods/UMethodBitmapRawImageDataPaintBox.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit11>
       <Unit12>
-        <Filename Value="Methods/UBitmapRawImageData.pas"/>
+        <Filename Value="Methods/UMethodBitmapRawImageData.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit12>
       <Unit13>
-        <Filename Value="Methods/UDummyMethod.pas"/>
+        <Filename Value="Methods/UMethodDummy.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit13>
       <Unit14>
-        <Filename Value="Methods/UBitmapRawImageDataMove.pas"/>
+        <Filename Value="Methods/UMethodBitmapRawImageDataMove.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit14>
       <Unit15>
-        <Filename Value="Methods/UOpenGLMethod.pas"/>
+        <Filename Value="Methods/UMethodOpenGL.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit15>
       <Unit16>
-        <Filename Value="Methods/UOpenGLPBOMethod.pas"/>
+        <Filename Value="Methods/UMethodOpenGLPBO.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit16>
       <Unit17>
-        <Filename Value="Methods/UGraphics32Method.pas"/>
+        <Filename Value="Methods/UMethodGraphics32.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit17>
+      <Unit18>
+        <Filename Value="Methods/UMethodBitmapScanline.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="Methods/UMethodMove.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit19>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

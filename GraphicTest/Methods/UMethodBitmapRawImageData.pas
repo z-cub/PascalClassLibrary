@@ -1,4 +1,4 @@
-unit UBitmapRawImageData;
+unit UMethodBitmapRawImageData;
 
 {$mode delphi}
 
@@ -8,9 +8,9 @@ uses
   Classes, SysUtils, UDrawMethod, UFastBitmap, Graphics, GraphType;
 
 type
-  { TBitmapRawImageData }
+  { TMethodBitmapRawImageData }
 
-  TBitmapRawImageData = class(TDrawMethodImage)
+  TMethodBitmapRawImageData = class(TDrawMethodImage)
     constructor Create; override;
     procedure DrawFrame(FastBitmap: TFastBitmap); override;
   end;
@@ -18,9 +18,9 @@ type
 
 implementation
 
-{ TBitmapRawImageData }
+{ TMethodBitmapRawImageData }
 
-constructor TBitmapRawImageData.Create;
+constructor TMethodBitmapRawImageData.Create;
 begin
   inherited;
   Caption := 'TBitmap.RawImage.Data';
@@ -28,7 +28,7 @@ begin
     'Then TImage is responsible for show loaded data.');
 end;
 
-procedure TBitmapRawImageData.DrawFrame(FastBitmap: TFastBitmap);
+procedure TMethodBitmapRawImageData.DrawFrame(FastBitmap: TFastBitmap);
 var
   Y, X: Integer;
   PixelPtr: PCardinal;

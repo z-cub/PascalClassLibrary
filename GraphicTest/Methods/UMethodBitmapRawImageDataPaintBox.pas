@@ -1,4 +1,4 @@
-unit UBitmapRawImageDataPaintBox;
+unit UMethodBitmapRawImageDataPaintBox;
 
 {$mode delphi}
 
@@ -9,9 +9,9 @@ uses
   FPimage, IntfGraphics, GraphType;
 
 type
-  { TBitmapRawImageDataPaintBox }
+  { TMethodBitmapRawImageDataPaintBox }
 
-  TBitmapRawImageDataPaintBox = class(TDrawMethodPaintBox)
+  TMethodBitmapRawImageDataPaintBox = class(TDrawMethodPaintBox)
     TempBitmap: TBitmap;
     constructor Create; override;
     procedure Init(Parent: TWinControl; Size: TPoint; PixelFormat: TPixelFormat); override;
@@ -23,9 +23,9 @@ type
 
 implementation
 
-{ TBitmapRawImageDataPaintBox }
+{ TMethodBitmapRawImageDataPaintBox }
 
-constructor TBitmapRawImageDataPaintBox.Create;
+constructor TMethodBitmapRawImageDataPaintBox.Create;
 begin
   inherited;
   Caption := 'TBitmap.RawImage.Data PaintBox';
@@ -34,7 +34,7 @@ begin
     'Then data is sent to PaintBox by Draw method.');
 end;
 
-procedure TBitmapRawImageDataPaintBox.Init(Parent: TWinControl; Size: TPoint;
+procedure TMethodBitmapRawImageDataPaintBox.Init(Parent: TWinControl; Size: TPoint;
   PixelFormat: TPixelFormat);
 begin
   inherited;
@@ -43,13 +43,13 @@ begin
   TempBitmap.SetSize(Size.X, Size.Y);
 end;
 
-procedure TBitmapRawImageDataPaintBox.Done;
+procedure TMethodBitmapRawImageDataPaintBox.Done;
 begin
   FreeAndNil(TempBitmap);
   inherited Done;
 end;
 
-procedure TBitmapRawImageDataPaintBox.Paint(Sender: TObject);
+procedure TMethodBitmapRawImageDataPaintBox.Paint(Sender: TObject);
 var
   hPaint, hBmp: HDC;
 begin
@@ -61,7 +61,7 @@ begin
   //BitBlt(hPaint, 0, 0, TempBitmap.Width, TempBitmap.Height, hBmp, 0, 0, srcCopy);
 end;
 
-procedure TBitmapRawImageDataPaintBox.DrawFrame(FastBitmap: TFastBitmap);
+procedure TMethodBitmapRawImageDataPaintBox.DrawFrame(FastBitmap: TFastBitmap);
 var
   Y, X: Integer;
   PixelPtr: PCardinal;

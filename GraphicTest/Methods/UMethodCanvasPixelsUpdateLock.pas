@@ -1,4 +1,4 @@
-unit UCanvasPixelsUpdateLock;
+unit UMethodCanvasPixelsUpdateLock;
 
 {$mode delphi}
 
@@ -8,9 +8,9 @@ uses
   Classes, SysUtils, UDrawMethod, UFastBitmap, Graphics;
 
 type
-  { TCanvasPixelsUpdateLock }
+  { TMethodCanvasPixelsUpdateLock }
 
-  TCanvasPixelsUpdateLock = class(TDrawMethodImage)
+  TMethodCanvasPixelsUpdateLock = class(TDrawMethodImage)
     constructor Create; override;
     procedure DrawFrame(FastBitmap: TFastBitmap); override;
   end;
@@ -18,9 +18,9 @@ type
 
 implementation
 
-{ TCanvasPixelsUpdateLock }
+{ TMethodCanvasPixelsUpdateLock }
 
-constructor TCanvasPixelsUpdateLock.Create;
+constructor TMethodCanvasPixelsUpdateLock.Create;
 begin
   inherited;
   Caption := 'TBitmap.Canvas.Pixels Update locking';
@@ -29,7 +29,7 @@ begin
     'painted only one at the end of complete operation');
 end;
 
-procedure TCanvasPixelsUpdateLock.DrawFrame(FastBitmap: TFastBitmap);
+procedure TMethodCanvasPixelsUpdateLock.DrawFrame(FastBitmap: TFastBitmap);
 var
   Y, X: Integer;
 begin
