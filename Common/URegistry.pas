@@ -1,6 +1,6 @@
 unit URegistry;
 
-{$MODE Delphi}
+{$MODE delphi}
 
 interface
 
@@ -16,9 +16,9 @@ type
   TRegistryContext = record
     RootKey: HKEY;
     Key: string;
+    class function Create(RootKey: TRegistryRoot; Key: string): TRegistryContext; static; overload;
+    class function Create(RootKey: HKEY; Key: string): TRegistryContext; static; overload;
     class operator Equal(A, B: TRegistryContext): Boolean;
-    function Create(RootKey: TRegistryRoot; Key: string): TRegistryContext; overload;
-    function Create(RootKey: HKEY; Key: string): TRegistryContext; overload;
   end;
 
   { TRegistryEx }
@@ -57,13 +57,13 @@ begin
   Result := (A.Key = B.Key) and (A.RootKey = B.RootKey);
 end;
 
-function TRegistryContext.Create(RootKey: TRegistryRoot; Key: string): TRegistryContext;
+class function TRegistryContext.Create(RootKey: TRegistryRoot; Key: string): TRegistryContext;
 begin
   Result.RootKey := RegistryRootHKEY[RootKey];
   Result.Key := Key;
 end;
 
-function TRegistryContext.Create(RootKey: HKEY; Key: string): TRegistryContext;
+class function TRegistryContext.Create(RootKey: HKEY; Key: string): TRegistryContext;
 begin
   Result.RootKey := RootKey;
   Result.Key := Key;
@@ -132,7 +132,7 @@ end;
 function TRegistryEx.OpenKey(const Key: string; CanCreate: Boolean): Boolean;
 begin
   {$IFDEF Linux}
-  CloseKey;
+  //CloseKey;
   {$ENDIF}
   Result := inherited OpenKey(Key, CanCreate);
 end;

@@ -28,4 +28,4 @@ msgstr ""
 #: ujobprogressview.stotalestimatedtime
 msgid "Total estimated time: %s"
 msgstr ""
-
+
