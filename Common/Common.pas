@@ -11,8 +11,8 @@ uses
   StopWatch, UCommon, UDebugLog, UDelay, UPrefixMultiplier, UURI, UThreading, 
   UMemory, UResetableThread, UPool, ULastOpenedList, URegistry, 
   UJobProgressView, UXMLUtils, UApplicationInfo, USyncCounter, UListViewSort, 
-  UPersistentForm, UFindFile, UScaleDPI, UTheme, UStringTable, UMetaCanvas, 
-  UGeometric, UTranslator, ULanguages, LazarusPackageIntf;
+  UPersistentForm, UFindFile, UScaleDPI, UTheme, UStringTable, UAboutDialog, 
+  UTranslator, ULanguages, UFormAbout, LazarusPackageIntf;
 
 implementation
 
@@ -28,6 +28,7 @@ begin
   RegisterUnit('UFindFile', @UFindFile.Register);
   RegisterUnit('UScaleDPI', @UScaleDPI.Register);
   RegisterUnit('UTheme', @UTheme.Register);
+  RegisterUnit('UAboutDialog', @UAboutDialog.Register);
   RegisterUnit('UTranslator', @UTranslator.Register);
 end;
 

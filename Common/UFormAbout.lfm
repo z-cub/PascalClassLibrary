@@ -1,0 +1,105 @@
+object FormAbout: TFormAbout
+  Left = 1014
+  Height = 402
+  Top = 577
+  Width = 702
+  Caption = 'About'
+  ClientHeight = 402
+  ClientWidth = 702
+  DesignTimePPI = 144
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '2.0.2.0'
+  object LabelDescription: TLabel
+    Left = 30
+    Height = 26
+    Top = 135
+    Width = 642
+    Align = alTop
+    BorderSpacing.Left = 30
+    BorderSpacing.Right = 30
+    BorderSpacing.Bottom = 30
+    Caption = 'Description'
+    ParentColor = False
+    ParentFont = False
+    WordWrap = True
+  end
+  object LabelContent: TLabel
+    Left = 30
+    Height = 26
+    Top = 191
+    Width = 642
+    Align = alTop
+    BorderSpacing.Around = 30
+    Caption = '   '
+    ParentColor = False
+    ParentFont = False
+  end
+  object PanelTop: TPanel
+    Left = 0
+    Height = 135
+    Top = 0
+    Width = 702
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 135
+    ClientWidth = 702
+    FullRepaint = False
+    ParentFont = False
+    TabOrder = 0
+    object LabelAppName: TLabel
+      Left = 96
+      Height = 100
+      Top = 20
+      Width = 572
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
+      BorderSpacing.Around = 30
+      Caption = 'Title'
+      Font.Height = -60
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
+    object ImageLogo: TImage
+      Left = 24
+      Height = 74
+      Top = 30
+      Width = 72
+    end
+  end
+  object PanelButtons: TPanel
+    Left = 0
+    Height = 75
+    Top = 327
+    Width = 702
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 75
+    ClientWidth = 702
+    TabOrder = 1
+    object ButtonHomePage: TButton
+      Left = 24
+      Height = 38
+      Top = 24
+      Width = 264
+      Anchors = [akLeft, akBottom]
+      Caption = 'Home page'
+      OnClick = ButtonHomePageClick
+      ParentFont = False
+      TabOrder = 0
+    end
+    object ButtonClose: TButton
+      Left = 532
+      Height = 38
+      Top = 24
+      Width = 140
+      Anchors = [akRight, akBottom]
+      Caption = 'Close'
+      ModalResult = 1
+      ParentFont = False
+      TabOrder = 1
+    end
+  end
+end

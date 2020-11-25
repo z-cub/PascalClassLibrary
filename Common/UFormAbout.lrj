@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":4691652,"name":"tformabout.caption","sourcebytes":[65,98,111,117,116],"value":"About"},
+{"hash":156067838,"name":"tformabout.labeldescription.caption","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110],"value":"Description"},
+{"hash":8736,"name":"tformabout.labelcontent.caption","sourcebytes":[32,32,32],"value":"   "},
+{"hash":5966629,"name":"tformabout.labelappname.caption","sourcebytes":[84,105,116,108,101],"value":"Title"},
+{"hash":58140853,"name":"tformabout.buttonhomepage.caption","sourcebytes":[72,111,109,101,32,112,97,103,101],"value":"Home page"},
+{"hash":4863637,"name":"tformabout.buttonclose.caption","sourcebytes":[67,108,111,115,101],"value":"Close"}
+]}

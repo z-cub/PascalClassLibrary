@@ -5,7 +5,7 @@ unit UApplicationInfo;
 interface
 
 uses
-  SysUtils, Classes, Forms, URegistry, Controls;
+  SysUtils, Classes, Forms, URegistry, Controls, Graphics;
 
 type
 
@@ -14,6 +14,7 @@ type
   TApplicationInfo = class(TComponent)
   private
     FDescription: TCaption;
+    FIcon: TBitmap;
     FIdentification: Byte;
     FLicense: string;
     FVersionMajor: Byte;
@@ -32,6 +33,7 @@ type
     function GetVersion: string;
   public
     constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
     property Version: string read GetVersion;
     function GetRegistryContext: TRegistryContext;
   published
@@ -51,6 +53,7 @@ type
     property RegistryKey: string read FRegistryKey write FRegistryKey;
     property RegistryRoot: TRegistryRoot read FRegistryRoot write FRegistryRoot;
     property License: string read FLicense write FLicense;
+    property Icon: TBitmap read FIcon write FIcon;
   end;
 
 procedure Register;
@@ -73,12 +76,19 @@ end;
 
 constructor TApplicationInfo.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner);
+  inherited;
   FVersionMajor := 1;
   FIdentification := 1;
   FAppName := Application.Name;
   FRegistryKey := '\Software\' + FAppName;
   FRegistryRoot := rrKeyCurrentUser;
+  FIcon := TBitmap.Create;
+end;
+
+destructor TApplicationInfo.Destroy;
+begin
+  FreeAndNil(FIcon);
+  inherited;
 end;
 
 function TApplicationInfo.GetRegistryContext: TRegistryContext;
