@@ -1,0 +1,23 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uformabout.slicense
+msgid "License"
+msgstr ""
+
+#: uformabout.sreleasedate
+msgid "Release date"
+msgstr ""
+
+#: uformabout.sversion
+msgid "Version"
+msgstr ""
+
+#: tformabout.buttonhomepage.caption
+msgid "Home page"
+msgstr ""
+
+#: tformabout.buttonclose.caption
+msgid "Close"
+msgstr ""
+

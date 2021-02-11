@@ -2,13 +2,13 @@ unit UPersistentForm;
 
 {$mode delphi}
 
-// Date: 2015-04-18
+// Date: 2020-11-26
 
 interface
 
 uses
   Classes, SysUtils, Forms, URegistry, LCLIntf, Registry, Controls, ComCtrls,
-  ExtCtrls;
+  ExtCtrls, LCLType;
 
 type
 
@@ -25,14 +25,17 @@ type
     FormNormalSize: TRect;
     FormRestoredSize: TRect;
     FormWindowState: TWindowState;
+    FormFullScreen: Boolean;
     Form: TForm;
     procedure LoadFromRegistry(RegistryContext: TRegistryContext);
     procedure SaveToRegistry(RegistryContext: TRegistryContext);
     function CheckEntireVisible(Rect: TRect): TRect;
     function CheckPartVisible(Rect: TRect; Part: Integer): TRect;
-    procedure Load(Form: TForm; DefaultMaximized: Boolean = False);
+    procedure Load(Form: TForm; DefaultMaximized: Boolean = False;
+      DefaultFullScreen: Boolean = False);
     procedure Save(Form: TForm);
     constructor Create(AOwner: TComponent); override;
+    procedure SetFullScreen(State: Boolean);
     property RegistryContext: TRegistryContext read FRegistryContext
       write FRegistryContext;
   published
@@ -42,8 +45,8 @@ type
 
 procedure Register;
 
-implementation
 
+implementation
 
 procedure Register;
 begin
@@ -168,7 +171,8 @@ begin
     FormRestoredSize.Bottom := ReadIntegerWithDefault('RestoredHeight', FormRestoredSize.Bottom - FormRestoredSize.Top)
       + FormRestoredSize.Top;
     // Other state
-    FormWindowState := TWindowState(ReadIntegerWithDefault('WindowState', Integer(wsNormal)));
+    FormWindowState := TWindowState(ReadIntegerWithDefault('WindowState', Integer(FormWindowState)));
+    FormFullScreen := ReadBoolWithDefault('FullScreen', FormFullScreen);
   finally
     Free;
   end;
@@ -192,6 +196,7 @@ begin
     WriteInteger('RestoredLeft', FormRestoredSize.Left);
     // Other state
     WriteInteger('WindowState', Integer(FormWindowState));
+    WriteBool('FullScreen', FormFullScreen);
   finally
     Free;
   end;
@@ -249,7 +254,8 @@ begin
   end;
 end;
 
-procedure TPersistentForm.Load(Form: TForm; DefaultMaximized: Boolean = False);
+procedure TPersistentForm.Load(Form: TForm; DefaultMaximized: Boolean = False;
+  DefaultFullScreen: Boolean = False);
 begin
   Self.Form := Form;
   // Set default
@@ -257,6 +263,8 @@ begin
     (Screen.Height - Form.Height) div 2, Form.Width, Form.Height);
   FormRestoredSize := Bounds((Screen.Width - Form.Width) div 2,
     (Screen.Height - Form.Height) div 2, Form.Width, Form.Height);
+  FormWindowState := Form.WindowState;
+  FormFullScreen := DefaultFullScreen;
 
   LoadFromRegistry(RegistryContext);
 
@@ -276,6 +284,7 @@ begin
     if not EqualRect(FormNormalSize, Form.BoundsRect) then
       Form.BoundsRect := FormNormalSize;
   end;
+  if FormFullScreen then SetFullScreen(True);
   LoadControl(Form);
 end;
 
@@ -283,8 +292,9 @@ procedure TPersistentForm.Save(Form: TForm);
 begin
   Self.Form := Form;
   FormNormalSize := Bounds(Form.Left, Form.Top, Form.Width, Form.Height);
-  FormRestoredSize := Bounds(Form.RestoredLeft, Form.RestoredTop, Form.RestoredWidth,
-    Form.RestoredHeight);
+  if not FormFullScreen then
+    FormRestoredSize := Bounds(Form.RestoredLeft, Form.RestoredTop, Form.RestoredWidth,
+      Form.RestoredHeight);
   FormWindowState := Form.WindowState;
   SaveToRegistry(RegistryContext);
   SaveControl(Form);
@@ -297,6 +307,34 @@ begin
     else Form := nil;
   FMinVisiblePart := 50;
   FRegistryContext.RootKey := HKEY_CURRENT_USER;
+end;
+
+procedure TPersistentForm.SetFullScreen(State: Boolean);
+begin
+  if State then begin
+    FormFullScreen := True;
+    FormNormalSize := Form.BoundsRect;
+    FormRestoredSize := Bounds(Form.RestoredLeft, Form.RestoredTop, Form.RestoredWidth,
+      Form.RestoredHeight);
+    FormWindowState := Form.WindowState;
+    ShowWindow(Form.Handle, SW_SHOWFULLSCREEN);
+    {$IFDEF WINDOWS}
+    Form.BorderStyle := bsNone;
+    {$ENDIF}
+  end else begin
+    FormFullScreen := False;
+    {$IFDEF WINDOWS}
+    Form.BorderStyle := bsSizeable;
+    {$ENDIF}
+    ShowWindow(Form.Handle, SW_SHOWNORMAL);
+    if FormWindowState = wsNormal then begin
+      Form.BoundsRect := FormNormalSize;
+    end else
+    if FormWindowState = wsMaximized then begin
+      Form.BoundsRect := FormRestoredSize;
+      Form.WindowState := wsMaximized;
+    end;
+  end;
 end;
 
 end.

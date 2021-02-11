@@ -5,7 +5,7 @@ unit UMetaCanvas;
 interface
 
 uses
-  Classes, SysUtils, Graphics, Contnrs, Types;
+  Classes, SysUtils, Graphics, Contnrs, Types, fgl;
 
 type
   TArrayOfPoint = array of TPoint;
@@ -16,6 +16,9 @@ type
     procedure Paint(Canvas: TCanvas); virtual;
     procedure Zoom(Factor: Double); virtual;
     procedure Move(Delta: TPoint); virtual;
+  end;
+
+  TCanvasObjects = class(TFPGObjectList<TCanvasObject>)
   end;
 
   { TCanvasText }
@@ -132,7 +135,7 @@ type
     procedure DoMoveTo(X, Y: Integer); override;
     procedure DoLineTo(X, Y: Integer); override;
   public
-    Objects: TObjectList;
+    Objects: TCanvasObjects;
     procedure FillRect(const ARect: TRect); overload; override;
     procedure FillRect(X1,Y1,X2,Y2: Integer); overload;
     procedure RoundRect(X1, Y1, X2, Y2: Integer; RX,RY: Integer); overload; override;
@@ -144,14 +147,15 @@ type
     function TextExtent(const Text: string): TSize; override;
     procedure Pie(EllipseX1, EllipseY1, EllipseX2, EllipseY2,
       StartX, StartY, EndX, EndY: Integer); override;
-    procedure SetSize(Size: TPoint);
     procedure Reset;
     procedure DrawTo(Canvas: TCanvas);
     procedure Zoom(Factor: Double);
     procedure Move(Delta: TPoint);
     constructor Create;
     destructor Destroy; override;
+    property Size: TPoint read FSize write FSize;
   end;
+
 
 implementation
 
@@ -197,7 +201,7 @@ destructor TCanvasPie.Destroy;
 begin
   Pen.Free;
   Brush.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 { TCanvasStretchDraw }
@@ -227,7 +231,7 @@ end;
 
 destructor TCanvasStretchDraw.Destroy;
 begin
-  inherited Destroy;
+  inherited;
 end;
 
 { TCanvasEllipse }
@@ -263,7 +267,7 @@ destructor TCanvasEllipse.Destroy;
 begin
   Pen.Free;
   Brush.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 { TCanvasPolygon }
@@ -303,7 +307,7 @@ destructor TCanvasPolygon.Destroy;
 begin
   Brush.Free;
   Pen.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 { TCanvasLine }
@@ -335,7 +339,7 @@ end;
 destructor TCanvasLine.Destroy;
 begin
   Pen.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 { TCanvasRectangle }
@@ -374,7 +378,7 @@ destructor TCanvasRectangle.Destroy;
 begin
   Pen.Free;
   Brush.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 { TCanvasText }
@@ -407,7 +411,7 @@ destructor TCanvasText.Destroy;
 begin
   Brush.Free;
   Font.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 { TCanvasObject }
@@ -617,11 +621,6 @@ begin
   Objects.Add(NewObj);
 end;
 
-procedure TMetaCanvas.SetSize(Size: TPoint);
-begin
-  FSize := Size;
-end;
-
 procedure TMetaCanvas.Reset;
 begin
   Objects.Count := 0;
@@ -632,7 +631,7 @@ var
   I: Integer;
 begin
   for I := 0 to Objects.Count - 1 do
-    TCanvasObject(Objects[I]).Paint(Canvas);
+    Objects[I].Paint(Canvas);
 end;
 
 procedure TMetaCanvas.Zoom(Factor: Double);
@@ -640,7 +639,7 @@ var
   I: Integer;
 begin
   for I := 0 to Objects.Count - 1 do
-    TCanvasObject(Objects[I]).Zoom(Factor);
+    Objects[I].Zoom(Factor);
 end;
 
 procedure TMetaCanvas.Move(Delta: TPoint);
@@ -648,20 +647,20 @@ var
   I: Integer;
 begin
   for I := 0 to Objects.Count - 1 do
-    TCanvasObject(Objects[I]).Move(Delta);
+    Objects[I].Move(Delta);
 end;
 
 constructor TMetaCanvas.Create;
 begin
   inherited;
   FPenPos := Point(0, 0);
-  Objects := TObjectList.Create;
+  Objects := TCanvasObjects.Create;
 end;
 
 destructor TMetaCanvas.Destroy;
 begin
   Objects.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 end.

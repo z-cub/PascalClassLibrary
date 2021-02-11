@@ -10,10 +10,10 @@ object FormAbout: TFormAbout
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '2.0.2.0'
+  LCLVersion = '2.0.10.0'
   object LabelDescription: TLabel
     Left = 30
-    Height = 26
+    Height = 24
     Top = 135
     Width = 642
     Align = alTop
@@ -27,8 +27,8 @@ object FormAbout: TFormAbout
   end
   object LabelContent: TLabel
     Left = 30
-    Height = 26
-    Top = 191
+    Height = 24
+    Top = 189
     Width = 642
     Align = alTop
     BorderSpacing.Around = 30
@@ -49,10 +49,10 @@ object FormAbout: TFormAbout
     ParentFont = False
     TabOrder = 0
     object LabelAppName: TLabel
-      Left = 96
-      Height = 100
+      Left = 108
+      Height = 84
       Top = 20
-      Width = 572
+      Width = 564
       Anchors = [akTop, akLeft, akRight]
       AutoSize = False
       BorderSpacing.Around = 30
@@ -67,6 +67,8 @@ object FormAbout: TFormAbout
       Height = 74
       Top = 30
       Width = 72
+      Proportional = True
+      Stretch = True
     end
   end
   object PanelButtons: TPanel

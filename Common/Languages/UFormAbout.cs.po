@@ -1,0 +1,32 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Chronos <robie@centrum.cz>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"X-Generator: Poedit 2.4.1\n"
+
+#: uformabout.slicense
+msgid "License"
+msgstr "Licence"
+
+#: uformabout.sreleasedate
+msgid "Release date"
+msgstr "Datum uvolnění"
+
+#: uformabout.sversion
+msgid "Version"
+msgstr "Verze"
+
+#: tformabout.buttonhomepage.caption
+msgid "Home page"
+msgstr "Domovská stránka"
+
+#: tformabout.buttonclose.caption
+msgid "Close"
+msgstr "Zavřít"

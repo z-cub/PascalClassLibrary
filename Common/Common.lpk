@@ -38,8 +38,8 @@
     </CompilerOptions>
     <Description Value="Various libraries"/>
     <License Value="GNU/GPL"/>
-    <Version Minor="7"/>
-    <Files Count="26">
+    <Version Minor="8"/>
+    <Files Count="28">
       <Item1>
         <Filename Value="StopWatch.pas"/>
         <UnitName Value="StopWatch"/>
@@ -155,6 +155,15 @@
         <Filename Value="ULanguages.pas"/>
         <UnitName Value="ULanguages"/>
       </Item26>
+      <Item27>
+        <Filename Value="UFormAbout.pas"/>
+        <UnitName Value="UFormAbout"/>
+      </Item27>
+      <Item28>
+        <Filename Value="UAboutDialog.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="UAboutDialog"/>
+      </Item28>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>

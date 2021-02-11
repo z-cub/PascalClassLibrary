@@ -5,7 +5,7 @@ unit UApplicationInfo;
 interface
 
 uses
-  SysUtils, Classes, Forms, URegistry, Controls, Graphics;
+  SysUtils, Classes, Forms, URegistry, Controls, Graphics, LCLType;
 
 type
 
@@ -13,7 +13,7 @@ type
 
   TApplicationInfo = class(TComponent)
   private
-    FDescription: TCaption;
+    FDescription: TTranslateString;
     FIcon: TBitmap;
     FIdentification: Byte;
     FLicense: string;
@@ -48,7 +48,7 @@ type
     property AuthorsName: string read FAuthorsName write FAuthorsName;
     property EmailContact: string read FEmailContact write FEmailContact;
     property AppName: string read FAppName write FAppName;
-    property Description: string read FDescription write FDescription;
+    property Description: TTranslateString read FDescription write FDescription;
     property ReleaseDate: TDateTime read FReleaseDate write FReleaseDate;
     property RegistryKey: string read FRegistryKey write FRegistryKey;
     property RegistryRoot: TRegistryRoot read FRegistryRoot write FRegistryRoot;
