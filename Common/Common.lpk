@@ -36,10 +36,12 @@
         </CompilerMessages>
       </Other>
     </CompilerOptions>
-    <Description Value="Various libraries"/>
-    <License Value="GNU/GPL"/>
+    <Description Value="Common package with various useful units.
+
+Source: https://svn.zdechov.net/PascalClassLibrary/Common/"/>
+    <License Value="Copy left."/>
     <Version Minor="8"/>
-    <Files Count="28">
+    <Files Count="29">
       <Item1>
         <Filename Value="StopWatch.pas"/>
         <UnitName Value="StopWatch"/>
@@ -164,6 +166,10 @@
         <HasRegisterProc Value="True"/>
         <UnitName Value="UAboutDialog"/>
       </Item28>
+      <Item29>
+        <Filename Value="UPixelPointer.pas"/>
+        <UnitName Value="UPixelPointer"/>
+      </Item29>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>
