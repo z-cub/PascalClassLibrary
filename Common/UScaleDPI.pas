@@ -226,7 +226,11 @@ begin
     ImgList.GetBitmap(I, TempBmp);
     Temp[I] := TBitmap.Create;
     Temp[I].SetSize(NewWidth, NewHeight);
+    {$IFDEF Linux}
+    Temp[I].PixelFormat := pf24bit;
+    {$ELSE}
     Temp[I].PixelFormat := pf32bit;
+    {$ENDIF}
     Temp[I].TransparentColor := TempBmp.TransparentColor;
     //Temp[I].TransparentMode := TempBmp.TransparentMode;
     Temp[I].Transparent := True;

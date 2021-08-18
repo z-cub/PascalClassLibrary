@@ -39,50 +39,51 @@ var
     lpNameBuffer: LPSTR; nSize: PULONG); stdcall;
 {$ENDIF}
 
-function IntToBin(Data: Int64; Count: Byte): string;
+function AddLeadingZeroes(const aNumber, Length : integer) : string;
 function BinToInt(BinStr: string): Int64;
-function TryHexToInt(Data: string; var Value: Integer): Boolean;
-function TryBinToInt(Data: string; var Value: Integer): Boolean;
 function BinToHexString(Source: AnsiString): string;
 //function DelTree(DirName : string): Boolean;
 //function GetSpecialFolderPath(Folder: Integer): string;
 function BCDToInt(Value: Byte): Byte;
 function CompareByteArray(Data1, Data2: TArrayOfByte): Boolean;
+procedure CopyStringArray(Dest: TStringArray; Source: array of string);
+function CombinePaths(Path1, Path2: string): string;
+function ComputerName: string;
+procedure DeleteFiles(APath, AFileSpec: string);
+procedure ExecuteProgram(Executable: string; Parameters: array of string);
+procedure FileDialogUpdateFilterFileType(FileDialog: TOpenDialog);
+procedure FreeThenNil(var Obj);
+function GetDirCount(Dir: string): Integer;
 function GetUserName: string;
-function LoggedOnUserNameEx(Format: TUserNameFormat): string;
-function SplitString(var Text: string; Count: Word): string;
 function GetBitCount(Variable: QWord; MaxIndex: Integer): Integer;
 function GetBit(Variable: QWord; Index: Byte): Boolean;
-procedure SetBit(var Variable: Int64; Index: Byte; State: Boolean); overload;
-procedure SetBit(var Variable: QWord; Index: Byte; State: Boolean); overload;
-procedure SetBit(var Variable: Cardinal; Index: Byte; State: Boolean); overload;
-procedure SetBit(var Variable: Word; Index: Byte; State: Boolean); overload;
-function AddLeadingZeroes(const aNumber, Length : integer) : string;
-function LastPos(const SubStr: String; const S: String): Integer;
+function GetStringPart(var Text: string; Separator: string): string;
 function GenerateNewName(OldName: string): string;
 function GetFileFilterItemExt(Filter: string; Index: Integer): string;
-procedure FileDialogUpdateFilterFileType(FileDialog: TOpenDialog);
-procedure DeleteFiles(APath, AFileSpec: string);
+function IntToBin(Data: Int64; Count: Byte): string;
+function LastPos(const SubStr: String; const S: String): Integer;
+function LoadFileToStr(const FileName: TFileName): AnsiString;
+function LoggedOnUserNameEx(Format: TUserNameFormat): string;
+function MergeArray(A, B: array of string): TArrayOfString;
+function OccurenceOfChar(What: Char; Where: string): Integer;
 procedure OpenWebPage(URL: string);
 procedure OpenFileInShell(FileName: string);
-procedure ExecuteProgram(Executable: string; Parameters: array of string);
-procedure FreeThenNil(var Obj);
-function RemoveQuotes(Text: string): string;
-function ComputerName: string;
-function OccurenceOfChar(What: Char; Where: string): Integer;
-function GetDirCount(Dir: string): Integer;
-function MergeArray(A, B: array of string): TArrayOfString;
-function LoadFileToStr(const FileName: TFileName): AnsiString;
-procedure SaveStringToFile(S, FileName: string);
-procedure SearchFiles(AList: TStrings; Dir: string;
-  FilterMethod: TFilterMethod = nil; FileNameMethod: TFileNameMethod = nil);
-function GetStringPart(var Text: string; Separator: string): string;
-function StripTags(const S: string): string;
 function PosFromIndex(SubStr: string; Text: string;
   StartIndex: Integer): Integer;
 function PosFromIndexReverse(SubStr: string; Text: string;
   StartIndex: Integer): Integer;
-procedure CopyStringArray(Dest: TStringArray; Source: array of string);
+function RemoveQuotes(Text: string): string;
+procedure SaveStringToFile(S, FileName: string);
+procedure SetBit(var Variable: Int64; Index: Byte; State: Boolean); overload;
+procedure SetBit(var Variable: QWord; Index: Byte; State: Boolean); overload;
+procedure SetBit(var Variable: Cardinal; Index: Byte; State: Boolean); overload;
+procedure SetBit(var Variable: Word; Index: Byte; State: Boolean); overload;
+procedure SearchFiles(AList: TStrings; Dir: string;
+  FilterMethod: TFilterMethod = nil; FileNameMethod: TFileNameMethod = nil);
+function SplitString(var Text: string; Count: Word): string;
+function StripTags(const S: string): string;
+function TryHexToInt(Data: string; var Value: Integer): Boolean;
+function TryBinToInt(Data: string; var Value: Integer): Boolean;
 
 
 implementation
@@ -666,6 +667,13 @@ begin
   SetLength(Dest, Length(Source));
   for I := 0 to Length(Dest) - 1 do
     Dest[I] := Source[I];
+end;
+
+function CombinePaths(Path1, Path2: string): string;
+begin
+  Result := Path1;
+  if Result <> '' then Result := Result + DirectorySeparator + Path2
+    else Result := Path2;
 end;
 
 

@@ -137,7 +137,6 @@ procedure BitmapStretchRect(DstBitmap: TRasterImage; DstRect: TRect;
   SrcBitmap: TRasterImage; SrcRect: TRect);
 var
   SrcPtr, DstPtr: TPixelPointer;
-  SubPtr: TPixelPointer;
   X, Y: Integer;
   XX, YY: Integer;
   R: TRect;

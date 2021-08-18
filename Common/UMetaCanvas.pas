@@ -5,7 +5,7 @@ unit UMetaCanvas;
 interface
 
 uses
-  Classes, SysUtils, Graphics, Contnrs, Types, fgl;
+  Classes, SysUtils, Graphics, Types, fgl;
 
 type
   TArrayOfPoint = array of TPoint;
