@@ -5,7 +5,7 @@ unit UThreading;
 interface
 
 uses
-  Classes, SysUtils, Forms, Contnrs, SyncObjs;
+  Classes, SysUtils, Forms, fgl, SyncObjs;
 
 type
   TExceptionEvent = procedure (Sender: TObject; E: Exception) of object;
@@ -21,7 +21,7 @@ type
     function GetPriority: TThreadPriority; virtual; abstract;
     function GetSuspended: Boolean; virtual; abstract;
     function GetTerminated: Boolean; virtual; abstract;
-    function GetThreadId: Integer; virtual; abstract;
+    function GetThreadId: TThreadID; virtual; abstract;
     procedure SetFreeOnTerminate(const AValue: Boolean); virtual; abstract;
     procedure SetPriority(const AValue: TThreadPriority); virtual; abstract;
     procedure SetSuspended(const AValue: Boolean); virtual; abstract;
@@ -41,7 +41,7 @@ type
     property Priority: TThreadPriority read GetPriority write SetPriority;
     property Terminated: Boolean read GetTerminated write SetTerminated;
     property Finished: Boolean read GetFinished;
-    property ThreadId: Integer read GetThreadId;
+    property ThreadId: TThreadID read GetThreadId;
   end;
 
   TVirtualThreadClass = class of TVirtualThread;
@@ -67,7 +67,7 @@ type
     function GetPriority: TThreadPriority; override;
     function GetSuspended: Boolean; override;
     function GetTerminated: Boolean; override;
-    function GetThreadId: Integer; override;
+    function GetThreadId: TThreadID; override;
     procedure SetFreeOnTerminate(const AValue: Boolean); override;
     procedure SetPriority(const AValue: TThreadPriority); override;
     procedure SetSuspended(const AValue: Boolean); override;
@@ -101,8 +101,8 @@ type
 
   { TThreadList }
 
-  TThreadList = class(TObjectList)
-    function FindById(Id: Integer): TVirtualThread;
+  TThreadList = class(TFPGObjectList<TVirtualThread>)
+    function FindById(Id: TThreadID): TVirtualThread;
     constructor Create; virtual;
   end;
 
@@ -163,7 +163,12 @@ var
 begin
   if MainThreadID = ThreadID then Method
   else begin
-    Thread := ThreadList.FindById(ThreadID);
+    try
+      ThreadListLock.Acquire;
+      Thread := ThreadList.FindById(ThreadID);
+    finally
+      ThreadListLock.Release;
+    end;
     if Assigned(Thread) then begin
       Thread.Synchronize(Method);
     end else raise Exception.Create(Format(SCurrentThreadNotFound, [ThreadID]));
@@ -172,14 +177,14 @@ end;
 
 { TThreadList }
 
-function TThreadList.FindById(Id: Integer): TVirtualThread;
+function TThreadList.FindById(Id: TThreadID): TVirtualThread;
 var
   I: Integer;
 begin
   I := 0;
-  while (I < ThreadList.Count) and (TVirtualThread(ThreadList[I]).ThreadID <> Id) do
+  while (I < ThreadList.Count) and (ThreadList[I].ThreadID <> Id) do
     Inc(I);
-  if I < ThreadList.Count then Result := TVirtualThread(ThreadList[I])
+  if I < ThreadList.Count then Result := ThreadList[I]
     else Result := nil;
 end;
 
@@ -232,7 +237,7 @@ begin
   Result := FTerminated;
 end;
 
-function TListedThread.GetThreadId: Integer;
+function TListedThread.GetThreadId: TThreadID;
 begin
   Result := FThread.ThreadID;
 end;
@@ -355,7 +360,7 @@ initialization
 
 ThreadListLock := TCriticalSection.Create;
 ThreadList := TThreadList.Create;
-ThreadList.OwnsObjects := False;
+ThreadList.FreeObjects := False;
 
 finalization
 
