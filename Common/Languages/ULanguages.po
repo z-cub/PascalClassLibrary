@@ -1,0 +1,781 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: ulanguages.slangauto
+msgid "Automatic"
+msgstr ""
+
+#: ulanguages.slang_aa
+msgid "Afar"
+msgstr ""
+
+#: ulanguages.slang_ab
+msgid "Abkhazian"
+msgstr ""
+
+#: ulanguages.slang_ae
+msgid "Avestan"
+msgstr ""
+
+#: ulanguages.slang_af
+msgid "Afrikaans"
+msgstr ""
+
+#: ulanguages.slang_ak
+msgid "Akan"
+msgstr ""
+
+#: ulanguages.slang_am
+msgid "Amharic"
+msgstr ""
+
+#: ulanguages.slang_an
+msgid "Aragonese"
+msgstr ""
+
+#: ulanguages.slang_ar
+msgid "Arabic"
+msgstr ""
+
+#: ulanguages.slang_as
+msgid "Assamese"
+msgstr ""
+
+#: ulanguages.slang_av
+msgid "Avaric"
+msgstr ""
+
+#: ulanguages.slang_ay
+msgid "Aymara"
+msgstr ""
+
+#: ulanguages.slang_az
+msgid "Azerbaijani"
+msgstr ""
+
+#: ulanguages.slang_ba
+msgid "Bashkir"
+msgstr ""
+
+#: ulanguages.slang_be
+msgid "Belarusian"
+msgstr ""
+
+#: ulanguages.slang_bg
+msgid "Bulgarian"
+msgstr ""
+
+#: ulanguages.slang_bh
+msgid "Bihari"
+msgstr ""
+
+#: ulanguages.slang_bi
+msgid "Bislama"
+msgstr ""
+
+#: ulanguages.slang_bm
+msgid "Bambara"
+msgstr ""
+
+#: ulanguages.slang_bn
+msgid "Bengali"
+msgstr ""
+
+#: ulanguages.slang_bo
+msgid "Tibetan"
+msgstr ""
+
+#: ulanguages.slang_br
+msgid "Breton"
+msgstr ""
+
+#: ulanguages.slang_bs
+msgid "Bosnian"
+msgstr ""
+
+#: ulanguages.slang_ca
+msgid "Catalan"
+msgstr ""
+
+#: ulanguages.slang_ce
+msgid "Chechen"
+msgstr ""
+
+#: ulanguages.slang_ch
+msgid "Chamorro"
+msgstr ""
+
+#: ulanguages.slang_co
+msgid "Corsican"
+msgstr ""
+
+#: ulanguages.slang_cr
+msgid "Cree"
+msgstr ""
+
+#: ulanguages.slang_cs
+msgid "Czech"
+msgstr ""
+
+#: ulanguages.slang_cv
+msgid "Chuvash"
+msgstr ""
+
+#: ulanguages.slang_cy
+msgid "Welsh"
+msgstr ""
+
+#: ulanguages.slang_da
+msgid "Danish"
+msgstr ""
+
+#: ulanguages.slang_de
+msgid "German"
+msgstr ""
+
+#: ulanguages.slang_de_at
+msgid "Austrian German"
+msgstr ""
+
+#: ulanguages.slang_de_ch
+msgid "Swiss German"
+msgstr ""
+
+#: ulanguages.slang_dv
+msgid "Divehi"
+msgstr ""
+
+#: ulanguages.slang_dz
+msgid "Dzongkha"
+msgstr ""
+
+#: ulanguages.slang_ee
+msgid "Ewe"
+msgstr ""
+
+#: ulanguages.slang_el
+msgid "Greek"
+msgstr ""
+
+#: ulanguages.slang_en
+msgid "English"
+msgstr ""
+
+#: ulanguages.slang_en_au
+msgid "Australian English"
+msgstr ""
+
+#: ulanguages.slang_en_ca
+msgid "Canadian English"
+msgstr ""
+
+#: ulanguages.slang_en_gb
+msgid "British English"
+msgstr ""
+
+#: ulanguages.slang_en_us
+msgid "American English"
+msgstr ""
+
+#: ulanguages.slang_eo
+msgid "Esperanto"
+msgstr ""
+
+#: ulanguages.slang_es
+msgid "Spanish"
+msgstr ""
+
+#: ulanguages.slang_et
+msgid "Estonian"
+msgstr ""
+
+#: ulanguages.slang_eu
+msgid "Basque"
+msgstr ""
+
+#: ulanguages.slang_fa
+msgid "Persian"
+msgstr ""
+
+#: ulanguages.slang_ff
+msgid "Fulah"
+msgstr ""
+
+#: ulanguages.slang_fi
+msgid "Finnish"
+msgstr ""
+
+#: ulanguages.slang_fj
+msgid "Fijian"
+msgstr ""
+
+#: ulanguages.slang_fo
+msgid "Faroese"
+msgstr ""
+
+#: ulanguages.slang_fr
+msgid "French"
+msgstr ""
+
+#: ulanguages.slang_fr_be
+msgctxt "ulanguages.slang_fr_be"
+msgid "Walloon"
+msgstr ""
+
+#: ulanguages.slang_fy
+msgid "Frisian"
+msgstr ""
+
+#: ulanguages.slang_ga
+msgid "Irish"
+msgstr ""
+
+#: ulanguages.slang_gd
+msgid "Gaelic"
+msgstr ""
+
+#: ulanguages.slang_gl
+msgid "Gallegan"
+msgstr ""
+
+#: ulanguages.slang_gn
+msgid "Guarani"
+msgstr ""
+
+#: ulanguages.slang_gu
+msgid "Gujarati"
+msgstr ""
+
+#: ulanguages.slang_gv
+msgid "Manx"
+msgstr ""
+
+#: ulanguages.slang_ha
+msgid "Hausa"
+msgstr ""
+
+#: ulanguages.slang_he
+msgid "Hebrew"
+msgstr ""
+
+#: ulanguages.slang_hi
+msgid "Hindi"
+msgstr ""
+
+#: ulanguages.slang_ho
+msgid "Hiri Motu"
+msgstr ""
+
+#: ulanguages.slang_hr
+msgid "Croatian"
+msgstr ""
+
+#: ulanguages.slang_ht
+msgid "Haitian"
+msgstr ""
+
+#: ulanguages.slang_hu
+msgid "Hungarian"
+msgstr ""
+
+#: ulanguages.slang_hy
+msgid "Armenian"
+msgstr ""
+
+#: ulanguages.slang_hz
+msgid "Herero"
+msgstr ""
+
+#: ulanguages.slang_ia
+msgid "Interlingua"
+msgstr ""
+
+#: ulanguages.slang_id
+msgid "Indonesian"
+msgstr ""
+
+#: ulanguages.slang_ie
+msgid "Interlingue"
+msgstr ""
+
+#: ulanguages.slang_ig
+msgid "Igbo"
+msgstr ""
+
+#: ulanguages.slang_ii
+msgid "Sichuan Yi"
+msgstr ""
+
+#: ulanguages.slang_ik
+msgid "Inupiaq"
+msgstr ""
+
+#: ulanguages.slang_io
+msgid "Ido"
+msgstr ""
+
+#: ulanguages.slang_is
+msgid "Icelandic"
+msgstr ""
+
+#: ulanguages.slang_it
+msgid "Italian"
+msgstr ""
+
+#: ulanguages.slang_iu
+msgid "Inuktitut"
+msgstr ""
+
+#: ulanguages.slang_ja
+msgid "Japanese"
+msgstr ""
+
+#: ulanguages.slang_jv
+msgid "Javanese"
+msgstr ""
+
+#: ulanguages.slang_ka
+msgid "Georgian"
+msgstr ""
+
+#: ulanguages.slang_kg
+msgid "Kongo"
+msgstr ""
+
+#: ulanguages.slang_ki
+msgid "Kikuyu"
+msgstr ""
+
+#: ulanguages.slang_kj
+msgid "Kuanyama"
+msgstr ""
+
+#: ulanguages.slang_kk
+msgid "Kazakh"
+msgstr ""
+
+#: ulanguages.slang_kl
+msgid "Greenlandic"
+msgstr ""
+
+#: ulanguages.slang_km
+msgid "Khmer"
+msgstr ""
+
+#: ulanguages.slang_kn
+msgid "Kannada"
+msgstr ""
+
+#: ulanguages.slang_ko
+msgid "Korean"
+msgstr ""
+
+#: ulanguages.slang_kr
+msgid "Kanuri"
+msgstr ""
+
+#: ulanguages.slang_ks
+msgid "Kashmiri"
+msgstr ""
+
+#: ulanguages.slang_ku
+msgid "Kurdish"
+msgstr ""
+
+#: ulanguages.slang_kv
+msgid "Komi"
+msgstr ""
+
+#: ulanguages.slang_kw
+msgid "Cornish"
+msgstr ""
+
+#: ulanguages.slang_ky
+msgid "Kirghiz"
+msgstr ""
+
+#: ulanguages.slang_la
+msgid "Latin"
+msgstr ""
+
+#: ulanguages.slang_lb
+msgid "Luxembourgish"
+msgstr ""
+
+#: ulanguages.slang_lg
+msgid "Ganda"
+msgstr ""
+
+#: ulanguages.slang_li
+msgid "Limburgan"
+msgstr ""
+
+#: ulanguages.slang_ln
+msgid "Lingala"
+msgstr ""
+
+#: ulanguages.slang_lo
+msgid "Lao"
+msgstr ""
+
+#: ulanguages.slang_lt
+msgid "Lithuanian"
+msgstr ""
+
+#: ulanguages.slang_lu
+msgid "Luba-Katanga"
+msgstr ""
+
+#: ulanguages.slang_lv
+msgid "Latvian"
+msgstr ""
+
+#: ulanguages.slang_mg
+msgid "Malagasy"
+msgstr ""
+
+#: ulanguages.slang_mh
+msgid "Marshallese"
+msgstr ""
+
+#: ulanguages.slang_mi
+msgid "Maori"
+msgstr ""
+
+#: ulanguages.slang_mk
+msgid "Macedonian"
+msgstr ""
+
+#: ulanguages.slang_ml
+msgid "Malayalam"
+msgstr ""
+
+#: ulanguages.slang_mn
+msgid "Mongolian"
+msgstr ""
+
+#: ulanguages.slang_mo
+msgid "Moldavian"
+msgstr ""
+
+#: ulanguages.slang_mr
+msgid "Marathi"
+msgstr ""
+
+#: ulanguages.slang_ms
+msgid "Malay"
+msgstr ""
+
+#: ulanguages.slang_mt
+msgid "Maltese"
+msgstr ""
+
+#: ulanguages.slang_my
+msgid "Burmese"
+msgstr ""
+
+#: ulanguages.slang_na
+msgid "Nauru"
+msgstr ""
+
+#: ulanguages.slang_nb
+msgid "Norwegian Bokmaal"
+msgstr ""
+
+#: ulanguages.slang_nd
+msgid "Ndebele, North"
+msgstr ""
+
+#: ulanguages.slang_ne
+msgid "Nepali"
+msgstr ""
+
+#: ulanguages.slang_ng
+msgid "Ndonga"
+msgstr ""
+
+#: ulanguages.slang_nl
+msgid "Dutch"
+msgstr ""
+
+#: ulanguages.slang_nl_be
+msgid "Flemish"
+msgstr ""
+
+#: ulanguages.slang_nn
+msgid "Norwegian Nynorsk"
+msgstr ""
+
+#: ulanguages.slang_no
+msgid "Norwegian"
+msgstr ""
+
+#: ulanguages.slang_nr
+msgid "Ndebele, South"
+msgstr ""
+
+#: ulanguages.slang_nv
+msgid "Navajo"
+msgstr ""
+
+#: ulanguages.slang_ny
+msgid "Chichewa"
+msgstr ""
+
+#: ulanguages.slang_oc
+msgid "Occitan"
+msgstr ""
+
+#: ulanguages.slang_oj
+msgid "Ojibwa"
+msgstr ""
+
+#: ulanguages.slang_om
+msgid "Oromo"
+msgstr ""
+
+#: ulanguages.slang_or
+msgid "Oriya"
+msgstr ""
+
+#: ulanguages.slang_os
+msgid "Ossetian"
+msgstr ""
+
+#: ulanguages.slang_pa
+msgid "Panjabi"
+msgstr ""
+
+#: ulanguages.slang_pi
+msgid "Pali"
+msgstr ""
+
+#: ulanguages.slang_pl
+msgid "Polish"
+msgstr ""
+
+#: ulanguages.slang_ps
+msgid "Pushto"
+msgstr ""
+
+#: ulanguages.slang_pt
+msgid "Portuguese"
+msgstr ""
+
+#: ulanguages.slang_pt_br
+msgid "Brazilian Portuguese"
+msgstr ""
+
+#: ulanguages.slang_qu
+msgid "Quechua"
+msgstr ""
+
+#: ulanguages.slang_rm
+msgid "Raeto-Romance"
+msgstr ""
+
+#: ulanguages.slang_rn
+msgid "Rundi"
+msgstr ""
+
+#: ulanguages.slang_ro
+msgid "Romanian"
+msgstr ""
+
+#: ulanguages.slang_ru
+msgid "Russian"
+msgstr ""
+
+#: ulanguages.slang_rw
+msgid "Kinyarwanda"
+msgstr ""
+
+#: ulanguages.slang_sa
+msgid "Sanskrit"
+msgstr ""
+
+#: ulanguages.slang_sc
+msgid "Sardinian"
+msgstr ""
+
+#: ulanguages.slang_sd
+msgid "Sindhi"
+msgstr ""
+
+#: ulanguages.slang_se
+msgid "Northern Sami"
+msgstr ""
+
+#: ulanguages.slang_sg
+msgid "Sango"
+msgstr ""
+
+#: ulanguages.slang_si
+msgid "Sinhalese"
+msgstr ""
+
+#: ulanguages.slang_sk
+msgid "Slovak"
+msgstr ""
+
+#: ulanguages.slang_sl
+msgid "Slovenian"
+msgstr ""
+
+#: ulanguages.slang_sm
+msgid "Samoan"
+msgstr ""
+
+#: ulanguages.slang_sn
+msgid "Shona"
+msgstr ""
+
+#: ulanguages.slang_so
+msgid "Somali"
+msgstr ""
+
+#: ulanguages.slang_sq
+msgid "Albanian"
+msgstr ""
+
+#: ulanguages.slang_sr
+msgid "Serbian"
+msgstr ""
+
+#: ulanguages.slang_ss
+msgid "Swati"
+msgstr ""
+
+#: ulanguages.slang_st
+msgid "Sotho, Southern"
+msgstr ""
+
+#: ulanguages.slang_su
+msgid "Sundanese"
+msgstr ""
+
+#: ulanguages.slang_sv
+msgid "Swedish"
+msgstr ""
+
+#: ulanguages.slang_sw
+msgid "Swahili"
+msgstr ""
+
+#: ulanguages.slang_ta
+msgid "Tamil"
+msgstr ""
+
+#: ulanguages.slang_te
+msgid "Telugu"
+msgstr ""
+
+#: ulanguages.slang_tg
+msgid "Tajik"
+msgstr ""
+
+#: ulanguages.slang_th
+msgid "Thai"
+msgstr ""
+
+#: ulanguages.slang_ti
+msgid "Tigrinya"
+msgstr ""
+
+#: ulanguages.slang_tk
+msgid "Turkmen"
+msgstr ""
+
+#: ulanguages.slang_tl
+msgid "Tagalog"
+msgstr ""
+
+#: ulanguages.slang_tn
+msgid "Tswana"
+msgstr ""
+
+#: ulanguages.slang_to
+msgid "Tonga"
+msgstr ""
+
+#: ulanguages.slang_tr
+msgid "Turkish"
+msgstr ""
+
+#: ulanguages.slang_ts
+msgid "Tsonga"
+msgstr ""
+
+#: ulanguages.slang_tt
+msgid "Tatar"
+msgstr ""
+
+#: ulanguages.slang_tw
+msgid "Twi"
+msgstr ""
+
+#: ulanguages.slang_ty
+msgid "Tahitian"
+msgstr ""
+
+#: ulanguages.slang_ug
+msgid "Uighur"
+msgstr ""
+
+#: ulanguages.slang_uk
+msgid "Ukrainian"
+msgstr ""
+
+#: ulanguages.slang_ur
+msgid "Urdu"
+msgstr ""
+
+#: ulanguages.slang_uz
+msgid "Uzbek"
+msgstr ""
+
+#: ulanguages.slang_ve
+msgid "Venda"
+msgstr ""
+
+#: ulanguages.slang_vi
+msgid "Vietnamese"
+msgstr ""
+
+#: ulanguages.slang_vo
+msgid "Volapuk"
+msgstr ""
+
+#: ulanguages.slang_wa
+msgctxt "ulanguages.slang_wa"
+msgid "Walloon"
+msgstr ""
+
+#: ulanguages.slang_wo
+msgid "Wolof"
+msgstr ""
+
+#: ulanguages.slang_xh
+msgid "Xhosa"
+msgstr ""
+
+#: ulanguages.slang_yi
+msgid "Yiddish"
+msgstr ""
+
+#: ulanguages.slang_yo
+msgid "Yoruba"
+msgstr ""
+
+#: ulanguages.slang_za
+msgid "Zhuang"
+msgstr ""
+
+#: ulanguages.slang_zh
+msgid "Chinese"
+msgstr ""
+
+#: ulanguages.slang_zu
+msgid "Zulu"
+msgstr ""
+

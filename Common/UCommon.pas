@@ -84,6 +84,7 @@ function SplitString(var Text: string; Count: Word): string;
 function StripTags(const S: string): string;
 function TryHexToInt(Data: string; var Value: Integer): Boolean;
 function TryBinToInt(Data: string; var Value: Integer): Boolean;
+procedure SortStrings(Strings: TStrings);
 
 
 implementation
@@ -674,6 +675,29 @@ begin
   Result := Path1;
   if Result <> '' then Result := Result + DirectorySeparator + Path2
     else Result := Path2;
+end;
+
+procedure SortStrings(Strings: TStrings);
+var
+  Tmp: TStringList;
+begin
+  Strings.BeginUpdate;
+  try
+    if Strings is TStringList then begin
+      TStringList(Strings).Sort;
+    end else begin
+      Tmp := TStringList.Create;
+      try
+        Tmp.Assign(Strings);
+        Tmp.Sort;
+        Strings.Assign(Tmp);
+      finally
+        Tmp.Free;
+      end;
+    end;
+  finally
+    Strings.EndUpdate;
+  end;
 end;
 
 

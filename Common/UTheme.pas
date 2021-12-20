@@ -4,7 +4,7 @@ interface
 
 uses
   Classes, SysUtils, Graphics, ComCtrls, Controls, ExtCtrls, Menus, StdCtrls,
-  Spin, Forms, Contnrs, Grids;
+  Spin, Forms, fgl, Grids;
 
 type
   TTheme = class
@@ -18,7 +18,7 @@ type
 
   { TThemes }
 
-  TThemes = class(TObjectList)
+  TThemes = class(TFPGObjectList<TTheme>)
     function AddNew(Name: string): TTheme;
     function FindByName(Name: string): TTheme;
     procedure LoadToStrings(Strings: TStrings);
@@ -73,11 +73,19 @@ end;
 
 procedure TThemes.LoadToStrings(Strings: TStrings);
 var
-  Theme: TTheme;
+  I: Integer;
 begin
-  Strings.Clear;
-  for Theme in Self do
-    Strings.AddObject(Theme.Name, Theme);
+  Strings.BeginUpdate;
+  try
+    while Strings.Count < Count do Strings.Add('');
+    while Strings.Count > Count do Strings.Delete(Strings.Count - 1);
+    for I := 0 to Count - 1 do begin
+      Strings[I] := Items[I].Name;
+      Strings.Objects[I] := Items[I];
+    end;
+  finally
+    Strings.EndUpdate;
+  end;
 end;
 
 procedure TThemeManager.SetThemeName(AValue: TTheme);
@@ -122,8 +130,8 @@ end;
 
 destructor TThemeManager.Destroy;
 begin
-  Themes.Free;
-  inherited Destroy;
+  FreeAndNil(Themes);
+  inherited;
 end;
 
 procedure TThemeManager.ApplyTheme(Component: TComponent);

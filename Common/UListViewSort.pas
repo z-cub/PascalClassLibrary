@@ -80,6 +80,7 @@ type
   private
     FOnChange: TNotifyEvent;
     FStringGrid1: TStringGrid;
+    procedure DoOnChange;
     procedure GridDoOnKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure GridDoOnResize(Sender: TObject);
   public
@@ -89,6 +90,7 @@ type
     function TextEnteredCount: Integer;
     function TextEnteredColumn(Index: Integer): Boolean;
     function GetColValue(Index: Integer): string;
+    procedure Reset;
     property StringGrid: TStringGrid read FStringGrid1 write FStringGrid1;
   published
     property OnChange: TNotifyEvent read FOnChange write FOnChange;
@@ -151,11 +153,15 @@ end;
 
 { TListViewFilter }
 
+procedure TListViewFilter.DoOnChange;
+begin
+  if Assigned(FOnChange) then FOnChange(Self);
+end;
+
 procedure TListViewFilter.GridDoOnKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  if Assigned(FOnChange) then
-    FOnChange(Self);
+  DoOnChange;
 end;
 
 procedure TListViewFilter.GridDoOnResize(Sender: TObject);
@@ -226,6 +232,16 @@ begin
   if (Index >= 0) and (Index < StringGrid.Columns.Count) then
     Result := StringGrid.Cells[Index, 0]
     else Result := '';
+end;
+
+procedure TListViewFilter.Reset;
+var
+  I: Integer;
+begin
+  with StringGrid do
+  for I := 0 to ColCount - 1 do
+    Cells[I, 0] := '';
+  DoOnChange;
 end;
 
 { TListViewSort }
