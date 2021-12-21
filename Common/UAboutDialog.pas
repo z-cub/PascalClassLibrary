@@ -15,13 +15,13 @@ type
   TAboutDialog = class(TComponent)
   private
     FApplicationInfo: TApplicationInfo;
-    FCoolTranslator: TTranslator;
+    FTranslator: TTranslator;
     FThemeManager: TThemeManager;
   public
     FormAbout: TFormAbout;
     procedure Show;
   published
-    property CoolTranslator: TTranslator read FCoolTranslator write FCoolTranslator;
+    property Translator: TTranslator read FTranslator write FTranslator;
     property ThemeManager: TThemeManager read FThemeManager write FThemeManager;
     property ApplicationInfo: TApplicationInfo read FApplicationInfo write
       FApplicationInfo;

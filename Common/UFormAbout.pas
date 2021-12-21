@@ -49,8 +49,8 @@ procedure TFormAbout.FormShow(Sender: TObject);
 begin
   if Assigned(AboutDialog) then
   with TAboutDialog(AboutDialog) do begin
-    if Assigned(CoolTranslator) then
-      CoolTranslator.TranslateComponentRecursive(Self);
+    if Assigned(Translator) then
+      Translator.TranslateComponentRecursive(Self);
     if Assigned(ThemeManager) then
       ThemeManager.UseTheme(Self);
 
