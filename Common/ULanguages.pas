@@ -1,11 +1,11 @@
 unit ULanguages;
 
-{$mode objfpc}{$H+}
+{$mode delphi}{$H+}
 
 interface
 
 uses
-  Classes, SysUtils, Contnrs;
+  Classes, SysUtils, fgl;
 
 type
   TLanguage = class
@@ -14,12 +14,12 @@ type
     Available: Boolean;
   end;
 
-  { TLanguageList }
+  { TLanguages }
 
-  TLanguageList = class(TObjectList)
+  TLanguages = class(TFPGObjectList<TLanguage>)
     function SearchByCode(ACode: string): TLanguage;
     procedure AddNew(Code: string; Name: string);
-    constructor Create;
+    constructor Create(FreeObjects: Boolean = True);
   end;
 
 
@@ -222,9 +222,9 @@ resourcestring
 implementation
 
 
-{ TLanguageList }
+{ TLanguages }
 
-function TLanguageList.SearchByCode(ACode: string): TLanguage;
+function TLanguages.SearchByCode(ACode: string): TLanguage;
 var
   I: Integer;
 begin
@@ -234,7 +234,7 @@ begin
     else Result := nil;
 end;
 
-procedure TLanguageList.AddNew(Code: string; Name: string);
+procedure TLanguages.AddNew(Code: string; Name: string);
 var
   NewItem: TLanguage;
 begin
@@ -244,9 +244,9 @@ begin
   Add(NewItem);
 end;
 
-constructor TLanguageList.Create;
+constructor TLanguages.Create(FreeObjects: Boolean);
 begin
-  inherited Create;
+  inherited;
   AddNew('', SLangAuto);
   AddNew('aa', SLang_aa);
   AddNew('ab', SLang_ab);

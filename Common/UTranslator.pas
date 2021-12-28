@@ -1,16 +1,19 @@
 unit UTranslator;
 
-{$mode Delphi}{$H+}
+{$mode delphi}{$H+}
 
 interface
 
 uses
-  Classes, SysUtils, Forms, ExtCtrls, Controls, Contnrs, LazFileUtils, LazUTF8,
+  Classes, SysUtils, Forms, ExtCtrls, Controls, fgl, LazFileUtils, LazUTF8,
   Translations, TypInfo, Dialogs, FileUtil, LCLProc, ULanguages, LCLType,
   LCLVersion;
 
 type
   THandleStringEvent = function (AValue: string): string of object;
+
+  TPoFiles = class(TFPGObjectList<TPOFile>)
+  end;
 
   { TComponentExcludes }
 
@@ -23,7 +26,7 @@ type
 
   { TComponentExcludesList }
 
-  TComponentExcludesList = class(TObjectList)
+  TComponentExcludesList = class(TFPGObjectList<TComponentExcludes>)
     function FindByClassType(AClassType: TClass): TComponentExcludes;
     procedure DumpToStrings(Strings: TStrings);
   end;
@@ -35,8 +38,8 @@ type
     FLanguage: TLanguage;
     FOnAutomaticLanguage: THandleStringEvent;
     FOnTranslate: TNotifyEvent;
-    FPOFilesFolder: string;
-    FPOFiles: TObjectList; // TObjectList<TPOFile>;
+    FPoFilesFolder: string;
+    FPoFiles: TPoFiles;
     function GetLocale: string;
     function GetLocaleShort: string;
     function FindLocaleFileName(LCExt: string): string;
@@ -49,9 +52,9 @@ type
     function GetLangFileDir: string;
   public
     ComponentExcludes: TComponentExcludesList;
-    Languages: TLanguageList;
+    Languages: TLanguages;
     procedure Translate;
-    procedure LanguageListToStrings(Strings: TStrings);
+    procedure LanguageListToStrings(Strings: TStrings; WithCode: Boolean = True);
     procedure TranslateResourceStrings(PoFileName: string);
     procedure TranslateUnitResourceStrings(UnitName: string; PoFileName: string);
     procedure TranslateComponent(Component: TPersistent);
@@ -62,7 +65,7 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
   published
-    property POFilesFolder: string read FPOFilesFolder write SetPOFilesFolder;
+    property POFilesFolder: string read FPoFilesFolder write SetPOFilesFolder;
     property Language: TLanguage read FLanguage write SetLanguage;
     property OnTranslate: TNotifyEvent read FOnTranslate write FOnTranslate;
     property OnAutomaticLanguage: THandleStringEvent read FOnAutomaticLanguage
@@ -70,6 +73,7 @@ type
   end;
 
 procedure Register;
+
 
 implementation
 
@@ -116,8 +120,8 @@ end;
 
 destructor TComponentExcludes.Destroy;
 begin
-  PropertyExcludes.Free;
-  inherited Destroy;
+  FreeAndNil(PropertyExcludes);
+  inherited;
 end;
 
 
@@ -127,14 +131,14 @@ procedure TTranslator.Translate;
 var
   I, J: Integer;
   Po: TPoFile;
-  Item: TPOFileItem;
+  Item: TPoFileItem;
 begin
   TranslateComponentRecursive(Application);
 
   // Merge files to single translation file
   try
-    Po := TPOFile.Create;
-    for I := 0 to FPOFiles.Count - 1 do
+    Po := TPoFile.Create;
+    for I := 0 to FPoFiles.Count - 1 do
     with TPoFile(FPoFiles[I]) do
       for J := 0 to Items.Count - 1 do
       with TPoFileItem(Items[J]) do begin
@@ -161,7 +165,7 @@ var
   LocaleShort: string;
   SearchMask: string;
 begin
-  FPOFiles.Clear;
+  FPoFiles.Clear;
   if Assigned(FLanguage) then
   try
     LocaleShort := GetLocaleShort;
@@ -176,7 +180,7 @@ begin
       //FileName := FindLocaleFileName('.po');
       if FileExists(FileName) and (
       ((LocaleShort = '') and (Pos('.', FileName) = Pos('.po', FileName))) or
-      (LocaleShort <> '')) then FPOFiles.Add(TPOFile.Create(FileName));
+      (LocaleShort <> '')) then FPoFiles.Add(TPOFile.Create(FileName));
     end;
   finally
     FileList.Free;
@@ -280,7 +284,6 @@ function TTranslator.IsExcluded(Component: TPersistent; PropertyName: string
   ): Boolean;
 var
   Item: TClass;
-
   Excludes: TComponentExcludes;
 begin
   Result := False;
@@ -300,26 +303,31 @@ end;
 
 function TTranslator.GetLangFileDir: string;
 begin
-  Result := FPOFilesFolder;
+  Result := FPoFilesFolder;
   if Copy(Result, 1, 1) <> DirectorySeparator then
     Result := ExtractFileDir(Application.ExeName) +
       DirectorySeparator + Result;
 end;
 
-procedure TTranslator.LanguageListToStrings(Strings: TStrings);
+procedure TTranslator.LanguageListToStrings(Strings: TStrings; WithCode: Boolean = True);
 var
   I: Integer;
   ItemName: string;
 begin
   with Strings do begin
-    Clear;
-    for I := 0 to Languages.Count - 1 do
-    with TLanguage(Languages[I]) do
-      if Available then begin
-        ItemName := Name;
-        if Code <> '' then ItemName := ItemName + ' (' + Code + ')';
-        AddObject(ItemName, Languages[I]);
-      end;
+    BeginUpdate;
+    try
+      Clear;
+      for I := 0 to Languages.Count - 1 do
+      with Languages[I] do
+        if Available then begin
+          ItemName := Name;
+          if WithCode and (Code <> '') then ItemName := ItemName + ' (' + Code + ')';
+          AddObject(ItemName, Languages[I]);
+        end;
+    finally
+      EndUpdate;
+    end;
   end;
 end;
 
@@ -341,7 +349,7 @@ begin
   Result := '';
   if Text <> '' then begin
     for I := 0 to FPoFiles.Count - 1 do begin
-      Result := TPoFile(FPOFiles[I]).Translate(Identifier, Text);
+      Result := TPoFile(FPoFiles[I]).Translate(Identifier, Text);
       if Result <> Text then Break;
     end;
     if Result = '' then Result := Text;
@@ -368,10 +376,10 @@ var
   LangDir: string;
 begin
   LangDir := GetLangFileDir;
-  TLanguage(Languages[0]).Available := True; // Automatic
+  Languages.SearchByCode('').Available := True; // Automatic
 
   for I := 1 to Languages.Count - 1 do
-  with TLanguage(Languages[I]) do begin
+  with Languages[I] do begin
     Available := FileExists(LangDir + DirectorySeparator + ExtractFileNameOnly(Application.ExeName) +
       '.' + Code + ExtensionSeparator + 'po') or (Code = 'en');
   end;
@@ -380,9 +388,9 @@ end;
 constructor TTranslator.Create(AOwner: TComponent);
 begin
   inherited;
-  FPOFiles := TObjectList.Create;
+  FPoFiles := TPoFiles.Create;
   ComponentExcludes := TComponentExcludesList.Create;
-  Languages := TLanguageList.Create;
+  Languages := TLanguages.Create;
   POFilesFolder := 'Languages';
   CheckLanguageFiles;
 
@@ -394,10 +402,10 @@ end;
 
 destructor TTranslator.Destroy;
 begin
-  FPOFiles.Free;
-  Languages.Free;
-  ComponentExcludes.Free;
-  inherited Destroy;
+  FreeAndNil(FPoFiles);
+  FreeAndNil(Languages);
+  FreeAndNil(ComponentExcludes);
+  inherited;
 end;
 
 function TTranslator.GetLocale: string;

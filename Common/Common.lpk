@@ -40,7 +40,7 @@
 
 Source: https://svn.zdechov.net/PascalClassLibrary/Common/"/>
     <License Value="Copy left."/>
-    <Version Minor="8"/>
+    <Version Minor="9"/>
     <Files Count="29">
       <Item1>
         <Filename Value="StopWatch.pas"/>
