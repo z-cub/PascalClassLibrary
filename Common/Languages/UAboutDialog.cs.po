@@ -11,15 +11,15 @@ msgstr ""
 "Language: cs\n"
 "X-Generator: Poedit 2.4.1\n"
 
-#: uformabout.slicense
+#: uaboutdialog.slicense
 msgid "License"
 msgstr "Licence"
 
-#: uformabout.sreleasedate
+#: uaboutdialog.sreleasedate
 msgid "Release date"
-msgstr "Datum uvolnění"
+msgstr "Datum uvolnění:"
 
-#: uformabout.sversion
+#: uaboutdialog.sversion
 msgid "Version"
 msgstr "Verze"
 

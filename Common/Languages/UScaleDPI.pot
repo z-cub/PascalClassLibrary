@@ -1,0 +1,8 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uscaledpi.swrongdpi
+#, object-pascal-format
+msgid "Wrong DPI [%d,%d]"
+msgstr ""
+

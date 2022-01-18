@@ -131,7 +131,7 @@ end;
 
 function TRegistryEx.OpenKey(const Key: string; CanCreate: Boolean): Boolean;
 begin
-  {$IFDEF Linux}
+  {$IFDEF UNIX}
   //CloseKey;
   {$ENDIF}
   Result := inherited OpenKey(Key, CanCreate);
@@ -139,7 +139,7 @@ end;
 
 function TRegistryEx.GetCurrentContext: TRegistryContext;
 begin
-  Result.Key := CurrentPath;
+  Result.Key := String(CurrentPath);
   Result.RootKey := RootKey;
 end;
 

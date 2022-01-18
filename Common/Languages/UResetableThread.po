@@ -1,7 +1,0 @@
-msgid ""
-msgstr "Content-Type: text/plain; charset=UTF-8"
-
-#: uresetablethread.swaiterror
-msgid "WaitFor error"
-msgstr "Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8"
-

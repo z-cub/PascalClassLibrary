@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Package Version="4">
+  <Package Version="5">
     <PathDelim Value="\"/>
     <Name Value="Common"/>
     <Type Value="RunAndDesignTime"/>
@@ -32,7 +32,7 @@
       </Linking>
       <Other>
         <CompilerMessages>
-          <IgnoredMessages idx5024="True"/>
+          <IgnoredMessages idx6058="True" idx5024="True" idx3124="True" idx3123="True"/>
         </CompilerMessages>
       </Other>
     </CompilerOptions>
@@ -171,6 +171,7 @@ Source: https://svn.zdechov.net/PascalClassLibrary/Common/"/>
         <UnitName Value="UPixelPointer"/>
       </Item29>
     </Files>
+    <CompatibilityMode Value="True"/>
     <i18n>
       <EnableI18N Value="True"/>
       <OutDir Value="Languages"/>

@@ -1,7 +1,7 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: uscaledpi.swrongdpi
-msgid "Wrong DPI [%d,%d]"
+#: uresetablethread.swaiterror
+msgid "WaitFor error"
 msgstr ""
 

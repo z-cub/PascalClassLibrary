@@ -12,6 +12,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.9\n"
 
 #: uscaledpi.swrongdpi
+#, object-pascal-format
 msgid "Wrong DPI [%d,%d]"
 msgstr "Chybné DPI [%d,%d]"
 

@@ -1,7 +1,0 @@
-msgid ""
-msgstr "Content-Type: text/plain; charset=UTF-8"
-
-#: uthreading.scurrentthreadnotfound
-msgid "Current thread ID %d not found in virtual thread list."
-msgstr "Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8Content-Type: text/plain; charset=UTF-8"
-

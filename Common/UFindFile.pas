@@ -58,7 +58,7 @@ const
 {$IFDEF WINDOWS}
   FilterAll = '*.*';
 {$ENDIF}
-{$IFDEF LINUX}
+{$IFDEF UNIX}
   FilterAll = '*';
 {$ENDIF}
 

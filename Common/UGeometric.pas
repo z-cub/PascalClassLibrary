@@ -95,6 +95,7 @@ function RotatePoints(Center: TPoint; P: TPointArray; Angle: Double): TPointArra
 var
   I: Integer;
 begin
+  Result := Default(TPointArray);
   SetLength(Result, Length(P));
   for I := 0 to High(P) do
     Result[I] := RotatePoint(Center, P[I], Angle);

@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, Menus,
-  StdCtrls, ExtCtrls, UApplicationInfo, UCommon, UTranslator, UTheme, UFormAbout;
+  ExtCtrls, UApplicationInfo, UCommon, UTranslator, UTheme, UFormAbout;
 
 type
 

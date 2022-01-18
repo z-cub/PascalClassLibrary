@@ -10,6 +10,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: uthreading.scurrentthreadnotfound
+#, object-pascal-format
 msgid "Current thread ID %d not found in virtual thread list."
 msgstr "Aktuální vlákno ID %d nenalezeno v seznamu virtuálních vláken."
 

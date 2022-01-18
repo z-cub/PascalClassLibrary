@@ -5,8 +5,8 @@ unit UCommon;
 interface
 
 uses
-  {$ifdef Windows}Windows,{$endif}
-  {$ifdef Linux}baseunix,{$endif}
+  {$IFDEF WINDOWS}Windows,{$ENDIF}
+  {$IFDEF UNIX}baseunix,{$ENDIF}
   Classes, SysUtils, StrUtils, Dialogs, Process, LCLIntf,
   FileUtil; //, ShFolder, ShellAPI;
 
@@ -34,7 +34,7 @@ var
   ExceptionHandler: TExceptionEvent;
   DLLHandle1: HModule;
 
-{$IFDEF Windows}
+{$IFDEF WINDOWS}
   GetUserNameEx: procedure (NameFormat: DWORD;
     lpNameBuffer: LPSTR; nSize: PULONG); stdcall;
 {$ENDIF}
@@ -291,6 +291,7 @@ end;
 
 function Explode(Separator: char; Data: string): TArrayOfString;
 begin
+  Result := nil;
   SetLength(Result, 0);
   while Pos(Separator, Data) > 0 do begin
     SetLength(Result, Length(Result) + 1);
@@ -345,6 +346,7 @@ end;
 var
   Name: UtsName;
 begin
+  Name := Default(UtsName);
   fpuname(Name);
   Result := Name.Nodename;
 end;
@@ -504,6 +506,7 @@ function MergeArray(A, B: array of string): TArrayOfString;
 var
   I: Integer;
 begin
+  Result := Default(TArrayOfString);
   SetLength(Result, Length(A) + Length(B));
   for I := 0 to Length(A) - 1 do
     Result[I] := A[I];

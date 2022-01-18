@@ -12,6 +12,7 @@ msgstr ""
 "X-Generator: Poedit 2.2\n"
 
 #: ujobprogressview.sestimatedtime
+#, object-pascal-format
 msgid "Estimated time: %s"
 msgstr "Odhadovaný čas: %s"
 
@@ -32,6 +33,7 @@ msgid "Termination"
 msgstr "Přerušení"
 
 #: ujobprogressview.stotalestimatedtime
+#, object-pascal-format
 msgid "Total estimated time: %s"
 msgstr "Celkový odhadovaný čas: %s"
 

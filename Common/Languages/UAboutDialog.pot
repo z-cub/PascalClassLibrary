@@ -1,0 +1,15 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uaboutdialog.slicense
+msgid "License"
+msgstr ""
+
+#: uaboutdialog.sreleasedate
+msgid "Release date"
+msgstr ""
+
+#: uaboutdialog.sversion
+msgid "Version"
+msgstr ""
+

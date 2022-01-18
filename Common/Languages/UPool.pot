@@ -1,0 +1,11 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: upool.sobjectpoolempty
+msgid "Object pool is empty"
+msgstr ""
+
+#: upool.sreleaseerror
+msgid "Unknown object for release from pool"
+msgstr ""
+

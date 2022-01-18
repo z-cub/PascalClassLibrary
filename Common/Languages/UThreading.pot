@@ -1,0 +1,8 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uthreading.scurrentthreadnotfound
+#, object-pascal-format
+msgid "Current thread ID %d not found in virtual thread list."
+msgstr ""
+

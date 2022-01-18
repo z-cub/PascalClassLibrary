@@ -1,0 +1,29 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: ujobprogressview.sestimatedtime
+#, object-pascal-format
+msgid "Estimated time: %s"
+msgstr ""
+
+#: ujobprogressview.sexecuted
+msgid "Executed"
+msgstr ""
+
+#: ujobprogressview.sfinished
+msgid "Finished"
+msgstr ""
+
+#: ujobprogressview.spleasewait
+msgid "Please wait..."
+msgstr ""
+
+#: ujobprogressview.sterminate
+msgid "Termination"
+msgstr ""
+
+#: ujobprogressview.stotalestimatedtime
+#, object-pascal-format
+msgid "Total estimated time: %s"
+msgstr ""
+

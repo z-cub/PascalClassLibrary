@@ -7,17 +7,17 @@ unit UScaleDPI;
 interface
 
 uses
-  Classes, Forms, Graphics, Controls, ComCtrls, LCLType, SysUtils, StdCtrls,
-  Contnrs;
+  Classes, Forms, Graphics, Controls, ComCtrls, LCLType, SysUtils, fgl;
 
 type
+  TControlDimensions = class;
 
   { TControlDimension }
 
   TControlDimension = class
     BoundsRect: TRect;
     FontHeight: Integer;
-    Controls: TObjectList; // TList<TControlDimension>
+    Controls: TControlDimensions;
     // Class specifics
     ButtonSize: TPoint; // TToolBar
     CoolBandWidth: Integer;
@@ -25,6 +25,9 @@ type
     ConstraintsMax: TPoint; // TForm
     constructor Create;
     destructor Destroy; override;
+  end;
+
+  TControlDimensions = class(TFPGObjectList<TControlDimension>)
   end;
 
   { TScaleDPI }
@@ -72,13 +75,13 @@ end;
 
 constructor TControlDimension.Create;
 begin
-  Controls := TObjectList.Create;
+  Controls := TControlDimensions.Create;
 end;
 
 destructor TControlDimension.Destroy;
 begin
   FreeAndNil(Controls);
-  inherited Destroy;
+  inherited;
 end;
 
 procedure TScaleDPI.SetAutoDetect(AValue: Boolean);
@@ -211,48 +214,56 @@ procedure TScaleDPI.ScaleImageList(ImgList: TImageList; FromDPI: TPoint);
 var
   TempBmp: TBitmap;
   Temp: array of TBitmap;
-  NewWidth, NewHeight: integer;
+  NewWidth: Integer;
+  NewHeight: Integer;
   I: Integer;
 begin
   ImgList.BeginUpdate;
-  NewWidth := ScaleX(ImgList.Width, FromDPI.X);
-  NewHeight := ScaleY(ImgList.Height, FromDPI.Y);
+  try
+    NewWidth := ScaleX(ImgList.Width, FromDPI.X);
+    NewHeight := ScaleY(ImgList.Height, FromDPI.Y);
 
-  SetLength(Temp, ImgList.Count);
-  for I := 0 to ImgList.Count - 1 do
-  begin
-    TempBmp := TBitmap.Create;
-    TempBmp.PixelFormat := pf32bit;
-    ImgList.GetBitmap(I, TempBmp);
-    Temp[I] := TBitmap.Create;
-    Temp[I].SetSize(NewWidth, NewHeight);
-    {$IFDEF Linux}
-    Temp[I].PixelFormat := pf24bit;
-    {$ELSE}
-    Temp[I].PixelFormat := pf32bit;
-    {$ENDIF}
-    Temp[I].TransparentColor := TempBmp.TransparentColor;
-    //Temp[I].TransparentMode := TempBmp.TransparentMode;
-    Temp[I].Transparent := True;
-    Temp[I].Canvas.Brush.Style := bsSolid;
-    Temp[I].Canvas.Brush.Color := Temp[I].TransparentColor;
-    Temp[I].Canvas.FillRect(0, 0, Temp[I].Width, Temp[I].Height);
+    Temp := nil;
+    SetLength(Temp, ImgList.Count);
+    for I := 0 to ImgList.Count - 1 do
+    begin
+      TempBmp := TBitmap.Create;
+      try
+        TempBmp.PixelFormat := pf32bit;
+        ImgList.GetBitmap(I, TempBmp);
+        Temp[I] := TBitmap.Create;
+        Temp[I].SetSize(NewWidth, NewHeight);
+        {$IFDEF UNIX}
+        Temp[I].PixelFormat := pf24bit;
+        {$ELSE}
+        Temp[I].PixelFormat := pf32bit;
+        {$ENDIF}
+        Temp[I].TransparentColor := TempBmp.TransparentColor;
+        //Temp[I].TransparentMode := TempBmp.TransparentMode;
+        Temp[I].Transparent := True;
+        Temp[I].Canvas.Brush.Style := bsSolid;
+        Temp[I].Canvas.Brush.Color := Temp[I].TransparentColor;
+        Temp[I].Canvas.FillRect(0, 0, Temp[I].Width, Temp[I].Height);
 
-    if (Temp[I].Width = 0) or (Temp[I].Height = 0) then Continue;
-    Temp[I].Canvas.StretchDraw(Rect(0, 0, Temp[I].Width, Temp[I].Height), TempBmp);
-    TempBmp.Free;
+        if (Temp[I].Width = 0) or (Temp[I].Height = 0) then Continue;
+        Temp[I].Canvas.StretchDraw(Rect(0, 0, Temp[I].Width, Temp[I].Height), TempBmp);
+      finally
+        TempBmp.Free;
+      end;
+    end;
+
+    ImgList.Clear;
+    ImgList.Width := NewWidth;
+    ImgList.Height := NewHeight;
+
+    for I := 0 to High(Temp) do
+    begin
+      ImgList.Add(Temp[I], nil);
+      Temp[i].Free;
+    end;
+  finally
+    ImgList.EndUpdate;
   end;
-
-  ImgList.Clear;
-  ImgList.Width := NewWidth;
-  ImgList.Height := NewHeight;
-
-  for I := 0 to High(Temp) do
-  begin
-    ImgList.Add(Temp[I], nil);
-    Temp[i].Free;
-  end;
-  ImgList.EndUpdate;
 end;
 
 function TScaleDPI.ScaleX(Size: Integer; FromDPI: Integer): Integer;
@@ -330,22 +341,25 @@ begin
   if Control is TCoolBar then
   with TCoolBar(Control) do begin
     BeginUpdate;
-    for I := 0 to Bands.Count - 1 do
-      with Bands[I] do begin
-        MinWidth := ScaleX(MinWidth, FromDPI.X);
-        MinHeight := ScaleY(MinHeight, FromDPI.Y);
-        // Workaround to bad band width auto sizing
-        //Width := ScaleX(Width, FromDPI.X);
-        Width := ScaleX(Control.Width + 28, FromDPI.X);
-        //Control.Invalidate;
+    try
+      for I := 0 to Bands.Count - 1 do
+        with Bands[I] do begin
+          MinWidth := ScaleX(MinWidth, FromDPI.X);
+          MinHeight := ScaleY(MinHeight, FromDPI.Y);
+          // Workaround to bad band width auto sizing
+          //Width := ScaleX(Width, FromDPI.X);
+          Width := ScaleX(Control.Width + 28, FromDPI.X);
+          //Control.Invalidate;
+        end;
+      // Workaround for bad autosizing of coolbar
+      if AutoSize then begin
+        AutoSize := False;
+        Height := ScaleY(Height, FromDPI.Y);
+        AutoSize := True;
       end;
-    // Workaround for bad autosizing of coolbar
-    if AutoSize then begin
-      AutoSize := False;
-      Height := ScaleY(Height, FromDPI.Y);
-      AutoSize := True;
+    finally
+      EndUpdate;
     end;
-    EndUpdate;
   end;
 
   if Control is TToolBar then begin
