@@ -83,7 +83,7 @@ end;
 
 destructor TLastOpenedList.Destroy;
 begin
-  Items.Free;
+  FreeAndNil(Items);
   inherited;
 end;
 
@@ -93,12 +93,15 @@ var
   I: Integer;
 begin
   if Assigned(MenuItem) then begin
-    MenuItem.Clear;
-    for I := 0 to Items.Count - 1 do begin
+    while MenuItem.Count > Items.Count do
+      MenuItem.Delete(MenuItem.Count - 1);
+    while MenuItem.Count < Items.Count do begin
       NewMenuItem := TMenuItem.Create(MenuItem);
-      NewMenuItem.Caption := Items[I];
-      NewMenuItem.OnClick := ClickAction;
       MenuItem.Add(NewMenuItem);
+    end;
+    for I := 0 to Items.Count - 1 do begin
+      MenuItem.Items[I].Caption := Items[I];
+      MenuItem.Items[I].OnClick := ClickAction;
     end;
   end;
 end;

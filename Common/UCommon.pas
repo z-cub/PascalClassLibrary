@@ -67,6 +67,7 @@ function LoggedOnUserNameEx(Format: TUserNameFormat): string;
 function MergeArray(A, B: array of string): TArrayOfString;
 function OccurenceOfChar(What: Char; Where: string): Integer;
 procedure OpenWebPage(URL: string);
+procedure OpenEmail(Email: string);
 procedure OpenFileInShell(FileName: string);
 function PosFromIndex(SubStr: string; Text: string;
   StartIndex: Integer): Integer;
@@ -82,8 +83,8 @@ procedure SearchFiles(AList: TStrings; Dir: string;
   FilterMethod: TFilterMethod = nil; FileNameMethod: TFileNameMethod = nil);
 function SplitString(var Text: string; Count: Word): string;
 function StripTags(const S: string): string;
-function TryHexToInt(Data: string; var Value: Integer): Boolean;
-function TryBinToInt(Data: string; var Value: Integer): Boolean;
+function TryHexToInt(Data: string; out Value: Integer): Boolean;
+function TryBinToInt(Data: string; out Value: Integer): Boolean;
 procedure SortStrings(Strings: TStrings);
 
 
@@ -245,7 +246,7 @@ begin
     Result := Result + Chars[(Data shr (I * 4)) and 15];
 end;
 
-function TryHexToInt(Data: string; var Value: Integer): Boolean;
+function TryHexToInt(Data: string; out Value: Integer): Boolean;
 var
   I: Integer;
 begin
@@ -261,7 +262,7 @@ begin
   end;
 end;
 
-function TryBinToInt(Data: string; var Value: Integer): Boolean;
+function TryBinToInt(Data: string; out Value: Integer): Boolean;
 var
   I: Integer;
 begin
@@ -472,6 +473,11 @@ end;
 procedure OpenWebPage(URL: string);
 begin
   OpenURL(URL);
+end;
+
+procedure OpenEmail(Email: string);
+begin
+  OpenURL('mailto:' + Email);
 end;
 
 procedure OpenFileInShell(FileName: string);
