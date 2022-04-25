@@ -1,7 +1,5 @@
 unit UGeometric;
 
-{$mode delphi}
-
 interface
 
 uses
@@ -25,6 +23,7 @@ function ArcTanPoint(Point: TPoint): Float;
 function RectEquals(A, B: TRect): Boolean;
 function RectEnlarge(Rect: TRect; Value: Integer): TRect;
 function ShiftRect(ARect: TRect; Delta: TPoint): TRect;
+
 
 implementation
 

@@ -1,7 +1,5 @@
 unit UMemory;
 
-{$mode Delphi}{$H+}
-
 interface
 
 uses
@@ -42,6 +40,7 @@ type
     function ReadByte: Byte;
     property Position: Integer read FPosition write FPosition;
   end;
+
 
 implementation
 

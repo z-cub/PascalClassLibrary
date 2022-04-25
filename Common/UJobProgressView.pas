@@ -1,12 +1,10 @@
 unit UJobProgressView;
 
-{$MODE Delphi}
-
 interface
 
 uses
   SysUtils, Variants, Classes, Graphics, Controls, Forms, Syncobjs,
-  Dialogs, ComCtrls, StdCtrls, ExtCtrls, fgl, UThreading, Math,
+  Dialogs, ComCtrls, StdCtrls, ExtCtrls, Generics.Collections, UThreading, Math,
   DateUtils;
 
 const
@@ -70,7 +68,7 @@ type
     property Terminate: Boolean read FTerminate write SetTerminate;
   end;
 
-  TJobs = class(TFPGObjectList<TJob>)
+  TJobs = class(TObjectList<TJob>)
   end;
 
   TJobThread = class(TListedThread)
@@ -162,6 +160,7 @@ procedure Register;
 
 resourcestring
   SExecuted = 'Executed';
+
 
 implementation
 

@@ -2,8 +2,6 @@ unit UPrefixMultiplier;
 
 // Date: 2010-06-01
 
-{$mode delphi}
-
 interface
 
 uses

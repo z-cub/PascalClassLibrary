@@ -4,7 +4,7 @@ unit StopWatch;
 interface
 
 uses
-  {$IFDEF Windows}Windows,{$ENDIF}
+  {$IFDEF WINDOWS}Windows,{$ENDIF}
   SysUtils, DateUtils;
 
 type
@@ -31,6 +31,7 @@ type
     property IsRunning : Boolean read fIsRunning;
   end;
 
+
 implementation
 
 constructor TStopWatch.Create(const startOnCreate : boolean = false) ;
@@ -39,7 +40,7 @@ begin
 
   fIsRunning := False;
 
-  {$IFDEF Windows}
+  {$IFDEF WINDOWS}
   fIsHighResolution := QueryPerformanceFrequency(fFrequency) ;
   {$ELSE}
   fIsHighResolution := False;

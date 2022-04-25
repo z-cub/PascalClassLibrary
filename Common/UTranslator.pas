@@ -1,18 +1,16 @@
 unit UTranslator;
 
-{$mode delphi}{$H+}
-
 interface
 
 uses
-  Classes, SysUtils, Forms, ExtCtrls, Controls, fgl, LazFileUtils, LazUTF8,
+  Classes, SysUtils, Forms, ExtCtrls, Controls, LazFileUtils, LazUTF8,
   Translations, TypInfo, Dialogs, FileUtil, LCLProc, ULanguages, LCLType,
-  LCLVersion;
+  LCLVersion, Generics.Collections;
 
 type
   THandleStringEvent = function (AValue: string): string of object;
 
-  TPoFiles = class(TFPGObjectList<TPOFile>)
+  TPoFiles = class(TObjectList<TPOFile>)
   end;
 
   { TComponentExcludes }
@@ -26,7 +24,7 @@ type
 
   { TComponentExcludesList }
 
-  TComponentExcludesList = class(TFPGObjectList<TComponentExcludes>)
+  TComponentExcludesList = class(TObjectList<TComponentExcludes>)
     function FindByClassType(AClassType: TClass): TComponentExcludes;
     procedure DumpToStrings(Strings: TStrings);
   end;
@@ -289,7 +287,6 @@ begin
   Result := False;
   Item := Component.ClassType;
   while Assigned(Item) do begin
-    //ShowMessage(Component.Name + ', ' + Component.ClassName + ', ' + Item.ClassName + ', ' + PropertyName);
     Excludes := ComponentExcludes.FindByClassType(Item.ClassType);
     if Assigned(Excludes) then begin
       if Excludes.PropertyExcludes.IndexOf(PropertyName) <> -1 then begin

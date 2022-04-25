@@ -32,7 +32,7 @@
       </Linking>
       <Other>
         <CompilerMessages>
-          <IgnoredMessages idx6058="True" idx5024="True" idx3124="True" idx3123="True"/>
+          <IgnoredMessages idx6058="True" idx5071="True" idx5024="True" idx3124="True" idx3123="True"/>
         </CompilerMessages>
       </Other>
     </CompilerOptions>
@@ -40,7 +40,7 @@
 
 Source: https://svn.zdechov.net/PascalClassLibrary/Common/"/>
     <License Value="Copy left."/>
-    <Version Minor="9"/>
+    <Version Minor="10"/>
     <Files Count="29">
       <Item1>
         <Filename Value="StopWatch.pas"/>

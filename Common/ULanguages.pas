@@ -1,11 +1,9 @@
 unit ULanguages;
 
-{$mode delphi}{$H+}
-
 interface
 
 uses
-  Classes, SysUtils, fgl;
+  Classes, SysUtils, Generics.Collections;
 
 type
   TLanguage = class
@@ -16,7 +14,7 @@ type
 
   { TLanguages }
 
-  TLanguages = class(TFPGObjectList<TLanguage>)
+  TLanguages = class(TObjectList<TLanguage>)
     function SearchByCode(ACode: string): TLanguage;
     procedure AddNew(Code: string; Name: string);
     constructor Create(FreeObjects: Boolean = True);

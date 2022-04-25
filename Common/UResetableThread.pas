@@ -1,7 +1,5 @@
 unit UResetableThread;
 
-{$mode Delphi}{$H+}
-
 interface
 
 uses

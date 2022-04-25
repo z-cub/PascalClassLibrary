@@ -2,12 +2,11 @@ unit UScaleDPI;
 
 { See: http://wiki.lazarus.freepascal.org/High_DPI }
 
-{$mode delphi}{$H+}
-
 interface
 
 uses
-  Classes, Forms, Graphics, Controls, ComCtrls, LCLType, SysUtils, fgl;
+  Classes, Forms, Graphics, Controls, ComCtrls, LCLType, SysUtils,
+  Generics.Collections;
 
 type
   TControlDimensions = class;
@@ -27,7 +26,7 @@ type
     destructor Destroy; override;
   end;
 
-  TControlDimensions = class(TFPGObjectList<TControlDimension>)
+  TControlDimensions = class(TObjectList<TControlDimension>)
   end;
 
   { TScaleDPI }

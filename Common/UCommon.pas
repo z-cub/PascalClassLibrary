@@ -1,13 +1,11 @@
 unit UCommon;
 
-{$mode delphi}
-
 interface
 
 uses
   {$IFDEF WINDOWS}Windows,{$ENDIF}
   {$IFDEF UNIX}baseunix,{$ENDIF}
-  Classes, SysUtils, StrUtils, Dialogs, Process, LCLIntf,
+  Classes, SysUtils, StrUtils, Dialogs, Process, LCLIntf, Graphics,
   FileUtil; //, ShFolder, ShellAPI;
 
 type
@@ -33,10 +31,15 @@ var
   ExceptionHandler: TExceptionEvent;
   DLLHandle1: HModule;
 
-{$IFDEF WINDOWS}
-  GetUserNameEx: procedure (NameFormat: DWORD;
-    lpNameBuffer: LPSTR; nSize: PULONG); stdcall;
-{$ENDIF}
+  {$IFDEF WINDOWS}
+    GetUserNameEx: procedure (NameFormat: DWORD;
+      lpNameBuffer: LPSTR; nSize: PULONG); stdcall;
+  {$ENDIF}
+
+const
+  clLightBlue = TColor($FF8080);
+  clLightGreen = TColor($80FF80);
+  clLightRed = TColor($8080FF);
 
 function AddLeadingZeroes(const aNumber, Length : integer) : string;
 function BinToInt(BinStr: string): Int64;

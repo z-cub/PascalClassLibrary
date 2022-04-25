@@ -1,7 +1,5 @@
 unit UStringTable;
 
-{$mode objfpc}{$H+}
-
 interface
 
 uses

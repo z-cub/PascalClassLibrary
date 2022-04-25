@@ -1,11 +1,9 @@
 unit UDebugLog; 
 
-{$mode delphi}
-
 interface
 
 uses
-  Classes, SysUtils, FileUtil, fgl, SyncObjs;
+  Classes, SysUtils, FileUtil, Generics.Collections, SyncObjs;
 
 type
   TDebugLogAddEvent = procedure (Group: string; Text: string) of object;
@@ -14,6 +12,9 @@ type
     Time: TDateTime;
     Group: string;
     Text: string;
+  end;
+
+  TDebugLogItems = class(TObjectList<TDebugLogItem>)
   end;
 
   TNewItemEvent = procedure (NewItem: TDebugLogItem) of object;
@@ -28,7 +29,7 @@ type
     FWriteToFileEnable: Boolean;
     procedure SetMaxCount(const AValue: Integer);
   public
-    Items: TFPGObjectList<TDebugLogItem>;
+    Items: TDebugLogItems;
     Lock: TCriticalSection;
     procedure Add(Text: string; Group: string = '');
     procedure WriteToFile(Text: string);
@@ -43,6 +44,7 @@ type
   end;
 
 procedure Register;
+
 
 implementation
 
@@ -116,7 +118,7 @@ end;
 constructor TDebugLog.Create(AOwner: TComponent);
 begin
   inherited;
-  Items := TFPGObjectList<TDebugLogItem>.Create;
+  Items := TDebugLogItems.Create;
   Lock := TCriticalSection.Create;
   MaxCount := 100;
   FileName := 'DebugLog.txt';
@@ -125,8 +127,8 @@ end;
 
 destructor TDebugLog.Destroy;
 begin
-  Items.Free;
-  Lock.Free;
+  FreeAndNil(Items);
+  FreeAndNil(Lock);
   inherited;
 end;
 

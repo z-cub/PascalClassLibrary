@@ -1,11 +1,9 @@
 unit UMetaCanvas;
 
-{$mode delphi}
-
 interface
 
 uses
-  Classes, SysUtils, Graphics, Types, fgl;
+  Classes, SysUtils, Graphics, Types, Generics.Collections;
 
 type
   TArrayOfPoint = array of TPoint;
@@ -18,7 +16,7 @@ type
     procedure Move(Delta: TPoint); virtual;
   end;
 
-  TCanvasObjects = class(TFPGObjectList<TCanvasObject>)
+  TCanvasObjects = class(TObjectList<TCanvasObject>)
   end;
 
   { TCanvasText }

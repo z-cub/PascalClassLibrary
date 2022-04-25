@@ -1,7 +1,5 @@
 unit UAboutDialog;
 
-{$mode delphi}
-
 interface
 
 uses

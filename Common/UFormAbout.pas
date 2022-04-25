@@ -1,7 +1,5 @@
 unit UFormAbout;
 
-{$mode delphi}
-
 interface
 
 uses

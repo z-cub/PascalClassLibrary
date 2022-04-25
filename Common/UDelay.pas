@@ -1,7 +1,5 @@
 unit UDelay;
 
-{$mode delphi}
-
 interface
 
 uses

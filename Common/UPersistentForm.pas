@@ -1,7 +1,5 @@
 unit UPersistentForm;
 
-{$mode delphi}
-
 // Date: 2020-11-26
 
 interface

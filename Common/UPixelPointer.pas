@@ -59,6 +59,7 @@ type
   function Color32ToColor(Color: TColor32): TColor;
   function ColorToColor32(Color: TColor): TColor32;
 
+
 implementation
 
 { TPixel32 }

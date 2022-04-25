@@ -1,7 +1,5 @@
 unit ULastOpenedList;
 
-{$mode delphi}
-
 interface
 
 uses

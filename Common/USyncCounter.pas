@@ -1,7 +1,5 @@
 unit USyncCounter;
 
-{$mode delphi}
-
 interface
 
 uses
@@ -24,6 +22,7 @@ type
     destructor Destroy; override;
     procedure Assign(Source: TSyncCounter);
   end;
+
 
 implementation
 

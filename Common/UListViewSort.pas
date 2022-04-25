@@ -2,14 +2,12 @@ unit UListViewSort;
 
 // Date: 2019-05-17
 
-{$mode delphi}
-
 interface
 
 uses
   {$IFDEF Windows}Windows, CommCtrl, LMessages, {$ENDIF}Classes, Graphics, ComCtrls, SysUtils,
-  Controls, DateUtils, Dialogs, fgl, Forms, Grids, StdCtrls, ExtCtrls,
-  LclIntf, LclType, LResources;
+  Controls, DateUtils, Dialogs, Forms, Grids, StdCtrls, ExtCtrls,
+  LclIntf, LclType, LResources, Generics.Collections, Generics.Defaults;
 
 type
   TSortOrder = (soNone, soUp, soDown);
@@ -18,6 +16,8 @@ type
 
   TCompareEvent = function (Item1, Item2: TObject): Integer of object;
   TListFilterEvent = procedure (ListViewSort: TListViewSort) of object;
+
+  TObjects = TObjectList<TObject>;
 
   { TListViewSort }
 
@@ -51,8 +51,8 @@ type
     procedure NewListViewWindowProc(var AMsg: TMessage);
     {$ENDIF}
   public
-    List: TFPGObjectList<TObject>;
-    Source: TFPGObjectList<TObject>;
+    Source: TObjects;
+    List: TObjects;
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     function CompareTime(Time1, Time2: TDateTime): Integer;
@@ -337,7 +337,7 @@ end;
 var
   ListViewSortCompare: TCompareEvent;
 
-function ListViewCompare(const Item1, Item2: TObject): Integer;
+function ListViewCompare(constref Item1, Item2: TObject): Integer;
 begin
   Result := ListViewSortCompare(Item1, Item2);
 end;
@@ -348,15 +348,16 @@ begin
   // it is necessary to use simple function compare handler with local variable
   ListViewSortCompare := Compare;
   if (List.Count > 0) then
-    List.Sort(ListViewCompare);
+    List.Sort(TComparer<TObject>.Construct(ListViewCompare));
 end;
 
 procedure TListViewSort.Refresh;
 begin
   if Assigned(FOnFilter) then FOnFilter(Self)
-  else if Assigned(Source) then
-    List.Assign(Source) else
+  else if Assigned(Source) then begin
     List.Clear;
+    List.AddRange(Source);
+  end else List.Clear;
   if ListView.Items.Count <> List.Count then
     ListView.Items.Count := List.Count;
   if Assigned(FOnCompareItem) and (Order <> soNone) then Sort(FOnCompareItem);
@@ -411,13 +412,13 @@ end;
 constructor TListViewSort.Create(AOwner: TComponent);
 begin
   inherited;
-  List := TFPGObjectList<TObject>.Create;
-  List.FreeObjects := False;
+  List := TObjects.Create;
+  List.OwnsObjects := False;
 end;
 
 destructor TListViewSort.Destroy;
 begin
-  List.Free;
+  FreeAndNil(List);
   inherited;
 end;
 

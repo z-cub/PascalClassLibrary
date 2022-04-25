@@ -1,11 +1,9 @@
 unit UPool;
 
-{$mode Delphi}{$H+}
-
 interface
 
 uses
-  Classes, SysUtils, syncobjs, fgl, UThreading;
+  Classes, SysUtils, syncobjs, Generics.Collections, UThreading;
 
 type
   TPoolItemClass = class of TObject;
@@ -21,8 +19,8 @@ type
   protected
     function NewItemObject: TObject; virtual;
   public
-    Items: TFPGObjectList<TObject>;
-    FreeItems: TFPGObjectList<TObject>;
+    Items: TObjectList<TObject>;
+    FreeItems: TObjectList<TObject>;
     function Acquire: TObject; virtual;
     procedure Release(Item: TObject); virtual;
     constructor Create; virtual;
@@ -184,9 +182,9 @@ end;
 constructor TPool.Create;
 begin
   inherited;
-  Items := TFPGObjectList<TObject>.Create;
-  FreeItems := TFPGObjectList<TObject>.Create;
-  FreeItems.FreeObjects := False;
+  Items := TObjectList<TObject>.Create;
+  FreeItems := TObjectList<TObject>.Create;
+  FreeItems.OwnsObjects := False;
   FReleaseEvent := TEvent.Create(nil, False, False, '');
 end;
 

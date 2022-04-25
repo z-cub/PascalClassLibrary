@@ -1,7 +1,5 @@
 unit UXMLUtils;
 
-{$mode delphi}
-
 interface
 
 uses

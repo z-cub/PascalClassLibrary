@@ -1,16 +1,13 @@
 unit UThreading;
 
-{$mode delphi}
-
 interface
 
 uses
-  Classes, SysUtils, Forms, fgl, SyncObjs;
+  Classes, SysUtils, Forms, Generics.Collections, SyncObjs;
 
 type
   TExceptionEvent = procedure (Sender: TObject; E: Exception) of object;
   TMethodCall = procedure of object;
-
 
   { TVirtualThread }
 
@@ -101,7 +98,7 @@ type
 
   { TThreadList }
 
-  TThreadList = class(TFPGObjectList<TVirtualThread>)
+  TThreadList = class(TObjectList<TVirtualThread>)
     function FindById(Id: TThreadID): TVirtualThread;
     constructor Create; virtual;
   end;
@@ -360,7 +357,7 @@ initialization
 
 ThreadListLock := TCriticalSection.Create;
 ThreadList := TThreadList.Create;
-ThreadList.FreeObjects := False;
+ThreadList.OwnsObjects := False;
 
 finalization
 

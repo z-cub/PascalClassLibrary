@@ -34,18 +34,15 @@ type
   TFindFile = class(TComponent)
   private
     s : TStringList;
-
     fSubFolder : boolean;
     fAttr: TFileAttrib;
     fPath : string;
     fFileMask : string;
-
     procedure SetPath(Value: string);
     procedure FileSearch(const inPath : string);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-
     function SearchForFiles: TStringList;
   published
     property FileAttr: TFileAttrib read fAttr write fAttr;
@@ -63,6 +60,7 @@ const
 {$ENDIF}
 
 procedure Register;
+
 
 implementation
 

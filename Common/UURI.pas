@@ -2,8 +2,6 @@ unit UURI;
 
 // Date: 2011-04-04
 
-{$mode delphi}
-
 interface
 
 uses
@@ -83,6 +81,7 @@ type
     destructor Destroy; override;
     property AsString: string read GetAsString write SetAsString;
   end;
+
 
 implementation
 
