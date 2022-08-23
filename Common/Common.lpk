@@ -41,7 +41,7 @@
 Source: https://svn.zdechov.net/PascalClassLibrary/Common/"/>
     <License Value="Copy left."/>
     <Version Minor="10"/>
-    <Files Count="29">
+    <Files Count="31">
       <Item1>
         <Filename Value="StopWatch.pas"/>
         <UnitName Value="StopWatch"/>
@@ -170,6 +170,14 @@ Source: https://svn.zdechov.net/PascalClassLibrary/Common/"/>
         <Filename Value="UPixelPointer.pas"/>
         <UnitName Value="UPixelPointer"/>
       </Item29>
+      <Item30>
+        <Filename Value="UDataFile.pas"/>
+        <UnitName Value="UDataFile"/>
+      </Item30>
+      <Item31>
+        <Filename Value="UTestCase.pas"/>
+        <UnitName Value="UTestCase"/>
+      </Item31>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>
