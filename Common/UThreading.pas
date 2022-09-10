@@ -291,7 +291,7 @@ begin
     ThreadListLock.Release;
   end;
   FThread.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 procedure TListedThread.Sleep(Delay: Integer);

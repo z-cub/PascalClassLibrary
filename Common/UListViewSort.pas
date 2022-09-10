@@ -148,7 +148,7 @@ end;
 
 destructor TListViewEx.Destroy;
 begin
-  inherited Destroy;
+  inherited;
 end;
 
 { TListViewFilter }

@@ -105,7 +105,7 @@ end;
 
 constructor TThreadedPool.Create;
 begin
-  inherited Create;
+  inherited;
   Lock := TCriticalSection.Create;
 end;
 
@@ -113,7 +113,7 @@ destructor TThreadedPool.Destroy;
 begin
   TotalCount := 0;
   Lock.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 { TPool }

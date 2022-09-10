@@ -84,7 +84,7 @@ end;
 destructor TFindFile.Destroy;
 begin
   s.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 procedure TFindFile.SetPath(Value: string);

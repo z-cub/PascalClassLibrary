@@ -67,7 +67,7 @@ end;
 destructor TSyncCounter.Destroy;
 begin
   Lock.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 procedure TSyncCounter.Assign(Source: TSyncCounter);

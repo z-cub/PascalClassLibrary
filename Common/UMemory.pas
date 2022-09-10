@@ -48,7 +48,7 @@ implementation
 
 procedure TPositionMemory.SetSize(AValue: Integer);
 begin
-  inherited SetSize(AValue);
+  inherited;
   if FPosition > FSize then FPosition := FSize;
 end;
 
@@ -105,7 +105,7 @@ end;
 destructor TMemory.Destroy;
 begin
   Size := 0;
-  inherited Destroy;
+  inherited;
 end;
 
 procedure TMemory.WriteMemory(Position: Integer; Memory: TMemory);

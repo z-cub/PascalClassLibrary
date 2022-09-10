@@ -640,7 +640,7 @@ end;
 destructor TProgress.Destroy;
 begin
   FLock.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 { TJob }

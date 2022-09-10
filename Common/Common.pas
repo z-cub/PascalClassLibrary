@@ -13,7 +13,7 @@ uses
   UJobProgressView, UXMLUtils, UApplicationInfo, USyncCounter, UListViewSort, 
   UPersistentForm, UFindFile, UScaleDPI, UTheme, UStringTable, UMetaCanvas, 
   UGeometric, UTranslator, ULanguages, UFormAbout, UAboutDialog, 
-  UPixelPointer, UDataFile, UTestCase, LazarusPackageIntf;
+  UPixelPointer, UDataFile, UTestCase, UGenerics, LazarusPackageIntf;
 
 implementation
 

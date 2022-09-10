@@ -181,7 +181,7 @@ end;
 destructor TPath.Destroy;
 begin
   Items.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 { TURI }
@@ -230,7 +230,7 @@ end;
 destructor TURI.Destroy;
 begin
   Path.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 procedure TURI.Assign(Source: TPersistent);
@@ -241,7 +241,7 @@ begin
     Path.Assign(TURI(Source).Path);
     Fragment := TURI(Source).Fragment;
     Query := TURI(Source).Query;
-  end else inherited Assign(Source);
+  end else inherited;
 end;
 
 { TURL }
@@ -289,7 +289,7 @@ end;
 
 destructor TURL.Destroy;
 begin
-  inherited Destroy;
+  inherited;
 end;
 
 { TFileName }
@@ -342,9 +342,8 @@ end;
 destructor TFileName.Destroy;
 begin
   Directory.Free;
-  inherited Destroy;
+  inherited;
 end;
-
 
 end.
 

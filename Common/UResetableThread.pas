@@ -164,7 +164,7 @@ begin
   FreeAndNil(FStartEvent);
   FreeAndNil(FStopEvent);
   FreeAndNil(FLock);
-  inherited Destroy;
+  inherited;
 end;
 
 { TResetableThreadExecute }
@@ -283,14 +283,14 @@ end;
 
 constructor TThreadPool.Create;
 begin
-  inherited Create;
+  inherited;
 end;
 
 destructor TThreadPool.Destroy;
 begin
   TotalCount := 0;
   WaitForEmpty;
-  inherited Destroy;
+  inherited;
 end;
 
 end.

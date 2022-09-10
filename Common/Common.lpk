@@ -41,7 +41,7 @@
 Source: https://svn.zdechov.net/PascalClassLibrary/Common/"/>
     <License Value="Copy left."/>
     <Version Minor="10"/>
-    <Files Count="31">
+    <Files Count="32">
       <Item1>
         <Filename Value="StopWatch.pas"/>
         <UnitName Value="StopWatch"/>
@@ -178,6 +178,10 @@ Source: https://svn.zdechov.net/PascalClassLibrary/Common/"/>
         <Filename Value="UTestCase.pas"/>
         <UnitName Value="UTestCase"/>
       </Item31>
+      <Item32>
+        <Filename Value="UGenerics.pas"/>
+        <UnitName Value="UGenerics"/>
+      </Item32>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>

@@ -19,10 +19,7 @@ type
     PanelTop: TPanel;
     PanelButtons: TPanel;
     procedure ButtonHomePageClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-  private
-    { private declarations }
   public
     AboutDialog: TObject; //TAboutDialog
     procedure UpdateInterface;
@@ -74,10 +71,6 @@ end;
 procedure TFormAbout.ButtonHomePageClick(Sender: TObject);
 begin
   OpenWebPage(TAboutDialog(AboutDialog).ApplicationInfo.HomePage);
-end;
-
-procedure TFormAbout.FormCreate(Sender: TObject);
-begin
 end;
 
 end.

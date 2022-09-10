@@ -6,7 +6,7 @@ uses
   {$IFDEF WINDOWS}Windows,{$ENDIF}
   {$IFDEF UNIX}baseunix,{$ENDIF}
   Classes, SysUtils, StrUtils, Dialogs, Process, LCLIntf, Graphics,
-  FileUtil; //, ShFolder, ShellAPI;
+  FileUtil, Generics.Collections; //, ShFolder, ShellAPI;
 
 type
   TArrayOfByte = array of Byte;
@@ -64,6 +64,7 @@ function GetStringPart(var Text: string; Separator: string): string;
 function GenerateNewName(OldName: string): string;
 function GetFileFilterItemExt(Filter: string; Index: Integer): string;
 function IntToBin(Data: Int64; Count: Byte): string;
+function Implode(Separator: Char; List: TList<string>): string;
 function LastPos(const SubStr: String; const S: String): Integer;
 function LoadFileToStr(const FileName: TFileName): AnsiString;
 function LoggedOnUserNameEx(Format: TUserNameFormat): string;
@@ -309,6 +310,17 @@ begin
   if Data <> '' then begin
     SetLength(Result, Length(Result) + 1);
     Result[High(Result)] := Data;
+  end;
+end;
+
+function Implode(Separator: Char; List: TList<string>): string;
+var
+  I: Integer;
+begin
+  Result := '';
+  for I := 0 to List.Count - 1 do begin
+    Result := Result + List[I];
+    if I < List.Count - 1 then Result := Result + Separator;
   end;
 end;
 
