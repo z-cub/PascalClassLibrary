@@ -1,7 +1,5 @@
 unit UPDServer;
 
-{$mode delphi}
-
 interface
 
 uses
@@ -9,8 +7,8 @@ uses
 
 type
   TPDServer = class
-
   end;
+
 
 implementation
 

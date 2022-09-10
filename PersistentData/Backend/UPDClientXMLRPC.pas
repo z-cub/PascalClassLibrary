@@ -1,7 +1,5 @@
 unit UPDClientXMLRPC;
 
-{$mode delphi}
-
 interface
 
 uses
@@ -15,8 +13,8 @@ type
     constructor Create(AOwner: TComponent); override;
   end;
 
-implementation
 
+implementation
 
 { TPDClientXMLRPC }
 
@@ -27,4 +25,4 @@ begin
 end;
 
 end.
-
+

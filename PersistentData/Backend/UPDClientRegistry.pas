@@ -1,7 +1,5 @@
 unit UPDClientRegistry;
 
-{$mode delphi}
-
 interface
 
 uses
@@ -12,12 +10,14 @@ type
   { TPDClientRegistry }
 
   TPDClientRegistry = class(TPDClient)
+  public
     Reg: TRegistry;
     //procedure GetItemList(Condition: TCondition; ItemList: TItemList); override;
     //procedure SetItemList(Condition: TCondition; ItemList: TItemList); override;
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
   end;
+
 
 implementation
 
@@ -45,8 +45,8 @@ end;
 destructor TPDClientRegistry.Destroy;
 begin
   Reg.Free;
-  inherited Destroy;
+  inherited;
 end;
 
 end.
-
+

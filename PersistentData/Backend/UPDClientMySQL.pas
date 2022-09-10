@@ -1,11 +1,9 @@
 unit UPDClientMySQL;
 
-{$mode delphi}
-
 interface
 
 uses
-  Classes, SysUtils, USqlDatabase, UPDClient, SpecializedDictionary;
+  Classes, SysUtils, USqlDatabase, UPDClient, UGenerics;
 
 type
 
@@ -21,6 +19,7 @@ type
     procedure InitSystemTypes; override;
     function GetConnected: Boolean; override;
     procedure Init; override;
+    function GetConnectionString: string; override;
   public
     procedure ObjectLoad(AObject: TObjectProxy); override;
     procedure ObjectSave(AObject: TObjectProxy); override;
@@ -44,13 +43,12 @@ type
     property Password: string read FPassword write FPassword;
   end;
 
-implementation
 
+implementation
 
 resourcestring
   SMissingBaseType = 'Missing base typ for %s';
   SUndefinedType = 'Undefined type in %0:s.%1:s';
-
 
 { TPDClientMySQL }
 
@@ -154,7 +152,6 @@ end;
 
 procedure TPDClientMySQL.ListSave(AList: TListProxy);
 begin
-
 end;
 
 procedure TPDClientMySQL.TypeDefine(AType: TPDType);
@@ -244,6 +241,12 @@ begin
   inherited;
 end;
 
+function TPDClientMySQL.GetConnectionString: string;
+begin
+  Result := 'Host:' + Host + ',Port:' + IntToStr(Port) + ',User:' + User +
+    ',Password:' + Password + ',Schema:' + Schema;
+end;
+
 constructor TPDClientMySQL.Create(AOwner: TComponent);
 begin
   inherited;
@@ -254,7 +257,7 @@ end;
 destructor TPDClientMySQL.Destroy;
 begin
   FreeAndNil(FDatabase);
-  inherited Destroy;
+  inherited;
 end;
 
 procedure TPDClientMySQL.Connect;

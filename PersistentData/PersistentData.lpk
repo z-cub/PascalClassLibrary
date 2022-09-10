@@ -1,34 +1,34 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Package Version="4">
+  <Package Version="5">
     <PathDelim Value="\"/>
     <Name Value="PersistentData"/>
+    <Type Value="RunAndDesignTime"/>
     <Author Value="Chronos"/>
     <CompilerOptions>
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
         <OtherUnitFiles Value="Backend"/>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)-$(BuildMode)"/>
       </SearchPaths>
-      <CodeGeneration>
-        <Checks>
-          <IOChecks Value="True"/>
-          <RangeChecks Value="True"/>
-          <OverflowChecks Value="True"/>
-          <StackChecks Value="True"/>
-        </Checks>
-      </CodeGeneration>
-      <Other>
-        <CompilerMessages>
-          <MsgFileName Value=""/>
-        </CompilerMessages>
-        <CompilerPath Value="$(CompPath)"/>
-      </Other>
+      <Parsing>
+        <SyntaxOptions>
+          <SyntaxMode Value="Delphi"/>
+          <CStyleOperator Value="False"/>
+          <AllowLabel Value="False"/>
+          <CPPInline Value="False"/>
+        </SyntaxOptions>
+      </Parsing>
+      <Linking>
+        <Debugging>
+          <GenerateDebugInfo Value="False"/>
+        </Debugging>
+      </Linking>
     </CompilerOptions>
     <Description Value="Generic data persistence layer"/>
     <License Value="GNU/GPL"/>
-    <Version Minor="1"/>
+    <Version Minor="2"/>
     <Files Count="8">
       <Item1>
         <Filename Value="UPDServer.pas"/>
@@ -64,7 +64,10 @@
         <UnitName Value="UPersistentData"/>
       </Item8>
     </Files>
-    <Type Value="RunAndDesignTime"/>
+    <CompatibilityMode Value="True"/>
+    <i18n>
+      <EnableI18N Value="True"/>
+    </i18n>
     <RequiredPkgs Count="2">
       <Item1>
         <PackageName Value="CoolWeb"/>

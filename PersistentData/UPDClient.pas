@@ -1,11 +1,9 @@
 unit UPDClient;
 
-{$mode delphi}
-
 interface
 
 uses
-  Classes, SysUtils, SpecializedList, SpecializedDictionary;
+  Classes, SysUtils, Generics.Collections, UGenerics;
 
 const
   SystemVersionObject = 'SystemVersion';
@@ -34,6 +32,12 @@ type
     procedure Assign(Source: TObjectProxy);
   end;
 
+  { TObjectProxies }
+
+  TObjectProxies = class(TObjectList<TObjectProxy>)
+    function AddProxy: TObjectProxy;
+  end;
+
   TOperation = (opUndefined, opDefined, opEqual, opNotEqual,
     opLess, opMore, opLessOrEqual, opMoreOrEqual);
 
@@ -58,7 +62,7 @@ type
     Condition: string;
     ObjectName: string;
     Path: string;
-    Objects: TListObject; // TListObject<TObjectProxy>
+    Objects: TObjectList<TObjectProxy>;
     procedure Clear;
     constructor Create;
     destructor Destroy; override;
@@ -73,12 +77,12 @@ type
     Index: Boolean;
   end;
 
-  { TPDTypePropertyList }
+  { TPDTypeProperties }
 
-  TPDTypePropertyList = class(TListObject)
+  TPDTypeProperties = class(TObjectList<TPDTypeProperty>)
     Client: TPDClient;
-    procedure AddSimple(Name: string; TypeName: string; Unique: Boolean = False;
-      Index: Boolean = False);
+    function AddSimple(Name: string; TypeName: string; Unique: Boolean = False;
+      Index: Boolean = False): TPDTypeProperty;
   end;
 
   { TPDType }
@@ -90,7 +94,7 @@ type
   public
     Name: string;
     DbType: string;
-    Properties: TPDTypePropertyList;
+    Properties: TPDTypeProperties;
     function IsDefined: Boolean;
     procedure Define;
     procedure Undefine;
@@ -99,9 +103,9 @@ type
     property Client: TPDClient read FClient write SetClient;
   end;
 
-  { TPDTypeList }
+  { TPDTypes }
 
-  TPDTypeList = class(TListObject)
+  TPDTypes = class(TObjectList<TPDType>)
     Client: TPDClient;
     function AddType(Name: string; DbType: string = ''): TPDType;
     function SearchByName(Name: string): TPDType;
@@ -120,7 +124,7 @@ type
     function GetConnectionString: string; virtual;
     procedure SetConnectionString(AValue: string); virtual;
   public
-    Types: TPDTypeList;
+    Types: TPDTypes;
     Version: string;
     BackendName: string;
     procedure ObjectLoad(AObject: TObjectProxy); virtual; abstract;
@@ -148,41 +152,48 @@ type
 
   TPDClientClass = class of TPDClient;
 
-  resourcestring
-    SClientNotSet = 'Client not set';
-    SNotSupported = 'Not supported';
-    SVersionMismatch = 'Version mismatch, client: %0:s, server: %1:s. Please upgrade database.';
-    SCantLoadObjectWithoutId = 'Can''t load object without id';
+resourcestring
+  SClientNotSet = 'Client not set';
+  SNotSupported = 'Not supported';
+  SVersionMismatch = 'Version mismatch, client: %0:s, server: %1:s. Please upgrade database.';
+  SCantLoadObjectWithoutId = 'Can''t load object without id';
 
 
 implementation
 
-{ TPDTypePropertyList }
+{ TObjectProxies }
 
-procedure TPDTypePropertyList.AddSimple(Name: string; TypeName: string;
-  Unique: Boolean; Index: Boolean);
-var
-  NewProperty: TPDTypeProperty;
+function TObjectProxies.AddProxy: TObjectProxy;
 begin
-  NewProperty := TPDTypeProperty(AddNew(TPDTypeProperty.Create));
-  NewProperty.Name := Name;
-  NewProperty.DbType := Client.Types.SearchByName(TypeName);
-  NewProperty.Unique := Unique;
-  NewProperty.Index := Index;
+  Result := TObjectProxy.Create;
+  Add(Result);
 end;
 
+{ TPDTypeProperties }
 
-{ TPDTypeList }
-
-function TPDTypeList.AddType(Name: string; DbType: string = ''): TPDType;
+function TPDTypeProperties.AddSimple(Name: string; TypeName: string;
+  Unique: Boolean = False; Index: Boolean = False): TPDTypeProperty;
 begin
-  Result := TPDType(AddNew(TPDType.Create));
+  Result := TPDTypeProperty.Create;
+  Result.Name := Name;
+  Result.DbType := Client.Types.SearchByName(TypeName);
+  Result.Unique := Unique;
+  Result.Index := Index;
+  Add(Result);
+end;
+
+{ TPDTypes }
+
+function TPDTypes.AddType(Name: string; DbType: string = ''): TPDType;
+begin
+  Result := TPDType.Create;
   Result.Client := Client;
   Result.Name := Name;
   Result.DbType := DbType;
+  Add(Result);
 end;
 
-function TPDTypeList.SearchByName(Name: string): TPDType;
+function TPDTypes.SearchByName(Name: string): TPDType;
 var
   I: Integer;
 begin
@@ -219,13 +230,13 @@ end;
 
 constructor TPDType.Create;
 begin
-  Properties := TPDTypePropertyList.Create;
+  Properties := TPDTypeProperties.Create;
 end;
 
 destructor TPDType.Destroy;
 begin
-  Properties.Free;
-  inherited Destroy;
+  FreeAndNil(Properties);
+  inherited;
 end;
 
 { TObjectProxy }
@@ -255,8 +266,8 @@ end;
 
 destructor TObjectProxy.Destroy;
 begin
-  Properties.Free;
-  inherited Destroy;
+  FreeAndNil(Properties);
+  inherited;
 end;
 
 procedure TObjectProxy.Assign(Source: TObjectProxy);
@@ -281,14 +292,14 @@ end;
 constructor TListProxy.Create;
 begin
   ColumnsFilter := TListString.Create;
-  Objects := TListObject.Create;
+  Objects := TObjectList<TObjectProxy>.Create;
 end;
 
 destructor TListProxy.Destroy;
 begin
-  Objects.Free;
-  ColumnsFilter.Free;
-  inherited Destroy;
+  FreeAndNil(Objects);
+  FreeAndNil(ColumnsFilter);
+  inherited;
 end;
 
 procedure TListProxy.Load;
@@ -312,7 +323,6 @@ end;
 
 procedure TPDClient.SetConnectionString(AValue: string);
 begin
-
 end;
 
 procedure TPDClient.SetConnected(AValue: Boolean);
@@ -346,7 +356,7 @@ begin
     NewObject.Id := 1;
     NewObject.Load;
 
-    DbVersion := NewObject.Properties.Values['Version'];
+    DbVersion := NewObject.Properties.Items['Version'];
     if Version <> DbVersion then
       raise Exception.Create(Format(SVersionMismatch, [Version, DbVersion]));
   end else begin
@@ -396,7 +406,7 @@ begin
     //Database.Query(DbRows, 'SHOW TABLES');
     Tables.Count := NewProxy.Objects.Count;
     for I := 0 to NewProxy.Objects.Count - 1 do
-      Tables[I] := TObjectProxy(NewProxy.Objects[I]).Properties.Values['TABLE_NAME'];
+      Tables[I] := TObjectProxy(NewProxy.Objects[I]).Properties.Items['TABLE_NAME'];
 
     for I := 0 to Types.Count - 1 do
     with TPDType(Types[I]) do begin
@@ -414,15 +424,15 @@ end;
 constructor TPDClient.Create(AOwner: TComponent);
 begin
   inherited;
-  Types := TPDTypeList.Create;
+  Types := TPDTypes.Create;
   Types.Client := Self;
   InitSystemTypes;
 end;
 
 destructor TPDClient.Destroy;
 begin
-  Types.Free;
-  inherited Destroy;
+  FreeAndNil(Types);
+  inherited;
 end;
 
 procedure TPDClient.Connect;
@@ -435,7 +445,6 @@ end;
 
 procedure TPDClient.Install;
 begin
-
 end;
 
 procedure TPDClient.Uninstall;
@@ -445,7 +454,6 @@ end;
 
 procedure TPDClient.Update;
 begin
-
 end;
 
 end.

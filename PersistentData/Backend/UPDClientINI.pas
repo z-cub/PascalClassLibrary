@@ -1,7 +1,5 @@
 unit UPDClientINI;
 
-{$mode delphi}
-
 interface
 
 uses
@@ -22,6 +20,7 @@ type
     procedure Connect; override;
     procedure Disconnect; override;
   end;
+
 
 implementation
 
@@ -48,7 +47,7 @@ end;
 destructor TPDClientINI.Destroy;
 begin
   Disconnect;
-  inherited Destroy;
+  inherited;
 end;
 
 procedure TPDClientINI.Connect;
@@ -62,4 +61,4 @@ begin
 end;
 
 end.
-
+

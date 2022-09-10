@@ -1,7 +1,5 @@
 unit UFormMain;
 
-{$mode delphi}{$H+}
-
 interface
 
 uses
@@ -21,14 +19,13 @@ type
     procedure AClientActiveExecute(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure FormShow(Sender: TObject);
-  private
-    { private declarations }
   public
     Client: TPDClient;
   end;
 
 var
   FormMain: TFormMain;
+
 
 implementation
 

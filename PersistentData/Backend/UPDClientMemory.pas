@@ -1,11 +1,9 @@
 unit UPDClientMemory;
 
-{$mode Delphi}{$H+}
-
 interface
 
 uses
-  Classes, SysUtils, UPDClient, SpecializedList;
+  Classes, SysUtils, UPDClient, Generics.Collections;
 
 type
 
@@ -20,7 +18,7 @@ type
     function GetNewObjectId: Integer;
     function SearchObject(Id: Integer): TObjectProxy;
   public
-    Objects: TListObject;
+    Objects: TObjectProxies;
     procedure ObjectLoad(AObject: TObjectProxy); override;
     procedure ObjectSave(AObject: TObjectProxy); override;
     procedure ObjectDelete(AObject: TObjectProxy); override;
@@ -39,6 +37,7 @@ type
 
 resourcestring
   SObjectNotFound = 'Object with id %s not found';
+
 
 implementation
 
@@ -96,7 +95,7 @@ begin
   if Assigned(Obj) then Obj.Assign(AObject)
     else begin
       AObject.Id := GetNewObjectId;
-      Obj := TObjectProxy(Objects.AddNew(TObjectProxy.Create));
+      Obj := Objects.AddProxy;
       Obj.Assign(AObject);
     end;
 end;
@@ -118,6 +117,7 @@ var
   P: Integer;
   NewObject: TObjectProxy;
   Table: string;
+  Item: TPair<string, string>;
 begin
   AList.Objects.Clear;
   for I := 0 to Objects.Count - 1 do
@@ -131,9 +131,9 @@ begin
       AList.Objects.Add(NewObject);
 
       if AList.ColummsFilterUse then begin
-        for P := 0 to Properties.Count - 1 do
-        if AList.ColumnsFilter.IndexOf(Properties.Keys[I]) <> -1 then
-          NewObject.Properties.Add(Properties.Keys[I], Properties[I].Value);
+        for Item in Properties do
+        if AList.ColumnsFilter.IndexOf(Item.Key) <> -1 then
+          NewObject.Properties.Add(Item.Key, Item.Value);
       end else NewObject.Properties.Assign(Properties);
     end;
   end;
@@ -146,55 +146,50 @@ end;
 
 procedure TPDClientMemory.ListSave(AList: TListProxy);
 begin
-
 end;
 
 procedure TPDClientMemory.TypeDefine(AType: TPDType);
 begin
-
 end;
 
 procedure TPDClientMemory.TypeUndefine(AType: TPDType);
 begin
-
 end;
 
 function TPDClientMemory.TypeIsDefined(AType: TPDType): Boolean;
 begin
-
+  Result := False;
 end;
 
 procedure TPDClientMemory.Install;
 begin
-
 end;
 
 procedure TPDClientMemory.Uninstall;
 begin
-
 end;
 
 constructor TPDClientMemory.Create(AOwner: TComponent);
 begin
   inherited;
-  Objects := TListObject.Create;
+  Objects := TObjectProxies.Create;
   BackendName := 'Memory';
 end;
 
 destructor TPDClientMemory.Destroy;
 begin
-  Objects.Free;
-  inherited Destroy;
+  FreeAndNil(Objects);
+  inherited;
 end;
 
 procedure TPDClientMemory.Connect;
 begin
-  inherited Connect;
+  inherited;
 end;
 
 procedure TPDClientMemory.Disconnect;
 begin
-  inherited Disconnect;
+  inherited;
 end;
 
 end.

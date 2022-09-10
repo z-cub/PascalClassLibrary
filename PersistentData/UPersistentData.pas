@@ -1,11 +1,9 @@
 unit UPersistentData;
 
-{$mode delphi}{$H+}
-
 interface
 
 uses
-  Classes, SysUtils, UPDClient, SpecializedList;
+  Classes, SysUtils, UPDClient, Generics.Collections;
 
 type
   TPDManagerItem = class
@@ -13,10 +11,14 @@ type
     ClientClass: TPDClientClass;
   end;
 
+  TPDManagerItems = class(TObjectList<TPDManagerItem>)
+  end;
+
   { TPDManager }
 
   TPDManager = class(TComponent)
-    Items: TListObject;
+  public
+    Items: TPDManagerItems;
     procedure Register(ClientClass: TPDClientClass);
     procedure LoadToStrings(Strings: TStrings);
     constructor Create(AOwner: TComponent); override;
@@ -76,13 +78,13 @@ end;
 constructor TPDManager.Create(AOwner: TComponent);
 begin
   inherited;
-  Items := TListObject.Create;
+  Items := TPDManagerItems.Create;
 end;
 
 destructor TPDManager.Destroy;
 begin
   FreeAndNil(Items);
-  inherited Destroy;
+  inherited;
 end;
 
 
